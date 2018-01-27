@@ -1,0 +1,19 @@
+{
+  "name": "attorney-form-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "git+https://github.com/ESOF423/attorney-form-builder.git",
+  "author": "Matthew <matthewcnitschke@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ESOF423/attorney-form-builder/issues"
+  },
+  "homepage": "https://github.com/ESOF423/attorney-form-builder#readme",
+  "devDependencies": {
+    "mocha": "^5.0.0"
+  }
+}
