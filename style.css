@@ -1,0 +1,47 @@
+/* MSU ESOF423
+** Spring 2018 
+** Group 3
+*/
+
+body {
+	background-color: #D8EFF2;
+}
+
+#titlebox{
+
+	position: center;
+	border-style: solid;
+	border-spacing: 1px;
+	border-color: #707B7D;
+	border-radius: 5px;
+
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+
+	padding-right: 1%;
+	padding-left: 1%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+#title1 {
+	text-align: center;
+	color: #000000;
+}
+
+#titlep {
+	text-align: left;
+	color: #000000;
+}
+
+.formbox{
+	display: grid;
+	justify-content: space-around;
+	align-content: space-between;
+	grid-template-columns: auto auto auto;
+	margin-left: 1%;
+	margin-right: 1%;
+	max-width: 100%;
+}
