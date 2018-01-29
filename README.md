@@ -22,3 +22,11 @@ Run tests
 ```
 $ yarn test
 ```
+
+# Updating on server
+
+```shell
+ssh <username>@server.redstonelab.net # ssh into the server
+cd /var/www/html # go to the html directory
+sudo ./update.sh # run the update script
+```
