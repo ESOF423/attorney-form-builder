@@ -32,3 +32,6 @@ ssh <username>@server.redstonelab.net # ssh into the server
 cd /var/www/html # go to the html directory
 sudo ./update.sh # run the update script
 ```
+
+# Bug reporting
+To report bugs, go to the "issues" link on this Github page. 
