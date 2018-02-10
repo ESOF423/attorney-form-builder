@@ -5,12 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <form action="/authenticate" method="POST">
+    <form id="loginForm" action="/authenticate" method="POST">
         <input type="text" placeholder="email" name="email">
         <input type="password" placeholder="password" name="password">
         <input type="submit" value="Submit">
+        <div id="errorText"></div>
     </form>
+
+    <script>
+        $.ajax({
+            url: '/authenticate',
+            method: 'post',
+            data: $("#loginForm").serialize(),
+            success: function(resp){
+                if (resp.isAuthenticated){
+                    // redirect to user page
+                } else {
+                    $("#errorText").html(resp.errorText)
+                }
+            }
+        })
+    </script>
 </body>
 </html>
