@@ -36,7 +36,7 @@
                     
                 },
                 error: function(e){
-                    $("#errorText").html(e)
+                    $("#errorText").html(e.responseJSON.message)
                 }
             })
         })

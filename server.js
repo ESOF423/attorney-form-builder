@@ -56,6 +56,7 @@ app.post('/authenticate', async (req, res) => {
 app.post('/createUser', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     try { 
+        console.log(req.body)
         var email = req.body.email
         var password = req.body.password
         var passwordRetype = req.body.passwordRetype
