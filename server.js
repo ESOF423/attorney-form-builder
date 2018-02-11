@@ -18,12 +18,19 @@ app.post('/authenticate', function(req, res) {
     var email = req.param('email')
     var password = req.param('password')
 
-    var isAuthenticated = dbFunctions.authenticate(email, password)
+    var isAuthenticated = false;
+    var errorText = ""
+    try {
+        isAuthenticated = dbFunctions.authenticate(email, password)
+    } catch(e) {
+        errorText = e
+    }
+    
 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
         isAuthenticated: isAuthenticated,
-        errorText: !isAuthenticated ? 'Invalid username or password' : ''
+        errorText: errorText
     }));
 })
 

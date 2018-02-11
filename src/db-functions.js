@@ -1,12 +1,14 @@
 const md5 = require('md5')
 const mysql = require('mysql')
 
+const config = require('config.json')
+
 function getConnection() {
     return new Promise((resolve) => {
         var connection = mysql.createConnection({
             host: "localhost",
-            user: "yourusername",
-            password: "yourpassword"
+            user: config.mysql.user,
+            password: config.mysql.password
         });
         
         connection.connect((err) => {
@@ -35,7 +37,7 @@ module.exports = {
     // checks to see if a user exists for a password and email combination
     authenticate: async (email, pass) => {
         pass = md5(pass)
-        
+    
         let conn = await getConnection();
         console.log(conn)
         let res = await query(conn, `
