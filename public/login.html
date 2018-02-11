@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <form id="loginForm" action="/authenticate" method="POST">
+    <form id="loginForm">
         <input type="text" placeholder="email" name="email">
         <input type="password" placeholder="password" name="password">
         <input type="submit" value="Submit">
@@ -17,7 +17,8 @@
     </form>
 
     <script>
-        $("#loginForm").submit(function() {
+        $("#loginForm").submit(function(e) {
+            e.preventDefault()
             $.ajax({
                 url: '/authenticate',
                 method: 'post',
