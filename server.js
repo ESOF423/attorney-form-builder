@@ -29,7 +29,7 @@ app.post('/authenticate', function(req, res) {
     var isAuthenticated = false;
     var errorText = ""
     try {
-        isAuthenticated = dbFunctions.authenticate(email, password)
+        isAuthenticated = await dbFunctions.authenticate(email, password)
     } catch(e) {
         errorText = e
     }
