@@ -44,7 +44,7 @@ module.exports = {
         let res = await query(conn, `
             SELECT * 
             FROM users
-            WHERE email=${email} AND password=${pass}
+            WHERE email='${email}' AND password='${pass}'
         `)
 
         return res.length > 0;
