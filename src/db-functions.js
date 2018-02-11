@@ -39,8 +39,8 @@ module.exports = {
     authenticate: async (email, pass) => {
         pass = md5(pass)
     
-        let conn = await getConnection();
-        console.log(conn)
+        let conn = await getConnection()
+
         let res = await query(conn, `
             SELECT * 
             FROM users
@@ -48,5 +48,30 @@ module.exports = {
         `)
 
         return res.length > 0;
+    },
+
+    createAccount: async (email, pass, passRetype) => {
+        if (pass != passRetype){
+            throw new Error("Passwords do not match")
+        }
+        pass = md5(pass)
+
+        let conn = await getConnection()
+
+        let emailExistsRes = await query(conn, `
+            SELECT *
+            FROM users
+            WHERE email='${email}'
+        `)
+
+        if (emailExists.length > 0){
+            throw new Error("Email already exists")
+        }
+
+        await query(conn, `
+            INSERT INTO users (email, password)
+            VALUES (${email}, ${pass});
+        `)
+
     }
 }

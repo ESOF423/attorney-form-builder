@@ -9,33 +9,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <form id="loginForm">
-        <input type="text" placeholder="email" id="email">
-        <input type="password" placeholder="password" id="password">
+    <form id="registerForm">
+        <input type="text" placeholder="Email" id="email">
+        <input type="password" placeholder="Password" id="password">
+        <input type="password" placeholder="Retype Password" id="passwordRetype">
         <input type="submit" value="Submit">
         <div id="errorText"></div>
     </form>
 
     <script>
-        $("#loginForm").submit(function(e) {
+        $("#registerForm").submit(function(e) {
             e.preventDefault()
             
             var data =  {
                 email: $("#email").val(),
-                password: $("#password").val()
+                password: $("#password").val(),
+                passwordRetype: $("#passwordRetype").val()
             }
 
             $.ajax({
                 method: 'POST',
-                url: '/authenticate',
+                url: '/register',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 success: function(resp){
-                    if (resp.isAuthenticated){
-                        // redirect to user page
-                    } else {
-                        $("#errorText").html("Invalid email or password")
-                    }
+                    
+                },
+                error: function(e){
+                    $("#errorText").html(e)
                 }
             })
         })

@@ -22,24 +22,45 @@ app.get('/login', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/login.html'))
 })
 
+app.get('/register', function(req, res){
+    res.sendFile(path.join(__dirname + '/public/register.html'))
+})
+
 app.post('/authenticate', async (req, res) => {
-    var email = req.body.email
-    var password = req.body.password
-
-    var isAuthenticated = false;
-    var errorText = ""
     try {
-        isAuthenticated = await dbFunctions.authenticate(email, password)
-    } catch(e) {
-        errorText = e
-    }
-    
+        var email = req.body.email
+        var password = req.body.password
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({
-        isAuthenticated: isAuthenticated,
-        errorText: errorText
-    }));
+        var isAuthenticated = await dbFunctions.authenticate(email, password)
+        
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({
+            isAuthenticated: isAuthenticated
+        }));
+
+    } catch(err) {
+        res.status(500)
+        res.render('error', { error: err })
+    }
+})
+
+app.post('/createUser', async (req, res) => {
+    try { 
+        var email = req.body.email
+        var password = req.body.password
+        var passwordRetype = req.body.passwordRetype
+
+        await dbFunctions.createAccount(email, password, passwordRetype)
+
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({
+            success: true
+        }));
+
+    } catch(err){
+        res.status(500)
+        res.render('error', { error: err })
+    }
 })
 
 app.listen(8080)
