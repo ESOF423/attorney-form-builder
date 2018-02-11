@@ -27,6 +27,7 @@ app.get('/register', function(req, res){
 })
 
 app.post('/authenticate', async (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
     try {
         var email = req.body.email
         var password = req.body.password
@@ -45,6 +46,7 @@ app.post('/authenticate', async (req, res) => {
 })
 
 app.post('/createUser', async (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
     try { 
         var email = req.body.email
         var password = req.body.password
@@ -52,7 +54,7 @@ app.post('/createUser', async (req, res) => {
 
         await dbFunctions.createAccount(email, password, passwordRetype)
 
-        res.setHeader('Content-Type', 'application/json');
+
         res.send(JSON.stringify({
             success: true
         }));
