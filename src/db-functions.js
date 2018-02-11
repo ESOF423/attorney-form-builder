@@ -1,7 +1,7 @@
 const md5 = require('md5')
 const mysql = require('mysql')
 
-const config = require('config.json')
+const config = require('./config.json')
 
 function getConnection() {
     return new Promise((resolve) => {
