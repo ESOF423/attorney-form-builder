@@ -17,17 +17,19 @@
     </form>
 
     <script>
-        $.ajax({
-            url: '/authenticate',
-            method: 'post',
-            data: $("#loginForm").serialize(),
-            success: function(resp){
-                if (resp.isAuthenticated){
-                    // redirect to user page
-                } else {
-                    $("#errorText").html(resp.errorText)
+        $("#loginForm").submit(function() {
+            $.ajax({
+                url: '/authenticate',
+                method: 'post',
+                data: $("#loginForm").serialize(),
+                success: function(resp){
+                    if (resp.isAuthenticated){
+                        // redirect to user page
+                    } else {
+                        $("#errorText").html(resp.errorText)
+                    }
                 }
-            }
+            })
         })
     </script>
 </body>
