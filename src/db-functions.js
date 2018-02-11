@@ -8,7 +8,8 @@ function getConnection() {
         var connection = mysql.createConnection({
             host: "localhost",
             user: config.mysql.user,
-            password: config.mysql.password
+            password: config.mysql.password,
+            database: 'website'
         });
         
         connection.connect((err) => {
