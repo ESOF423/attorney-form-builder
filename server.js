@@ -7,6 +7,7 @@ var dbFunctions = require('./src/db-functions.js')
 var app = express();
 
 function error(res, err){
+    console.log(err)
     res.status(err.status || 500);
     res.json({
         message: err.message,
