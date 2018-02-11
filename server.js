@@ -15,8 +15,8 @@ app.get('/login', function(req, res) {
 })
 
 app.post('/authenticate', function(req, res) {
-    var email = req.param('email')
-    var password = req.param('password')
+    var email = req.param.email
+    var password = req.param.password
 
     var isAuthenticated = false;
     var errorText = ""
