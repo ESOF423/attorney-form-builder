@@ -19,6 +19,7 @@
     <script>
         $("#loginForm").submit(function(e) {
             e.preventDefault()
+            var er = $("#loginForm").serialize()
             $.ajax({
                 url: '/authenticate',
                 method: 'post',
