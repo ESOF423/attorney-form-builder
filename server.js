@@ -22,7 +22,7 @@ app.get('/login', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/login.html'))
 })
 
-app.post('/authenticate', function(req, res) {
+app.post('/authenticate', async (req, res) => {
     var email = req.body.email
     var password = req.body.password
 
