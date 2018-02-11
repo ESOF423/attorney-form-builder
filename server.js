@@ -6,6 +6,14 @@ var dbFunctions = require('./src/db-functions.js')
 
 var app = express();
 
+function error(res, err){
+    res.status(err.status || 500);
+    res.json({
+        message: err.message,
+        error: err
+    });
+}
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
@@ -40,8 +48,7 @@ app.post('/authenticate', async (req, res) => {
         }));
 
     } catch(err) {
-        res.status(500)
-        res.render('error', { error: err })
+        error(res, err)
     }
 })
 
@@ -60,8 +67,7 @@ app.post('/createUser', async (req, res) => {
         }));
 
     } catch(err){
-        res.status(500)
-        res.render('error', { error: err })
+       error(res, err)
     }
 })
 
