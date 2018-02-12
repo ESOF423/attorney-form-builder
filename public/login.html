@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="loginForm">
+        <input type="text" placeholder="email" id="email">
+        <input type="password" placeholder="password" id="password">
+        <input type="submit" value="Submit">
+        <div id="errorText"></div>
+    </form>
+
+    <script>
+        $("#loginForm").submit(function(e) {
+            e.preventDefault()
+            
+            var data =  {
+                email: $("#email").val(),
+                password: $("#password").val()
+            }
+
+            $.ajax({
+                method: 'POST',
+                url: '/authenticate',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function(resp){
+                    if (resp.isAuthenticated){
+                        // redirect to user page
+                    } else {
+                        $("#errorText").html("Invalid email or password")
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+</html>
