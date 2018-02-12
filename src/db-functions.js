@@ -23,12 +23,12 @@ function getConnection() {
 }
 
 function query(conn, sql){
-    return new Promise((reject, resolve) => {
+    return new Promise((resolve, reject) => {
         conn.query(sql, function (err, result) {
+           
             if (err){
                 throw new Error(err)
             }
-
             resolve(result)
         });
     })
@@ -64,13 +64,13 @@ module.exports = {
             WHERE email='${email}'
         `)
 
-        if (emailExists.length > 0){
+        if (emailExistsRes.length > 0){
             throw new Error("Email already exists")
         }
 
         await query(conn, `
             INSERT INTO users (email, password)
-            VALUES (${email}, ${pass});
+            VALUES ('${email}', '${pass}');
         `)
 
     }
