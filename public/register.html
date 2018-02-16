@@ -14,7 +14,8 @@
         <input type="password" placeholder="Password" id="password">
         <input type="password" placeholder="Retype Password" id="passwordRetype">
         <input type="submit" value="Submit">
-        <div id="errorText"></div>
+        <div id="errorText" style="color: red"></div>
+        <div id="successText" style="color: green"></div>
     </form>
 
     <script>
@@ -33,7 +34,7 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 success: function(resp){
-                    
+                    $("#successText").html("Success")
                 },
                 error: function(e){
                     $("#errorText").html(e.responseJSON.message)

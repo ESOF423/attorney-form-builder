@@ -13,7 +13,12 @@
         <input type="text" placeholder="email" id="email">
         <input type="password" placeholder="password" id="password">
         <input type="submit" value="Submit">
-        <div id="errorText"></div>
+        <div id="errorText" style="color: red"></div>
+        <div id="successText"  style="color: green"></div>
+        <div>
+            Dont have an account?
+            <a href="/register">register</a>
+        </div>
     </form>
 
     <script>
@@ -32,7 +37,7 @@
                 contentType: 'application/json',
                 success: function(resp){
                     if (resp.isAuthenticated){
-                        // redirect to user page
+                        $("#successText").html("Success")
                     } else {
                         $("#errorText").html("Invalid email or password")
                     }
