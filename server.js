@@ -36,6 +36,14 @@ app.get('/register', function(req, res){
     res.sendFile(path.join(__dirname + '/public/register.html'))
 })
 
+app.get('/user', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/user.html'))
+})
+
+app.get('/formSearch', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/formSearch.html'))
+})
+
 app.post('/authenticate', async (req, res) => {
     try {
         var email = req.body.email
@@ -73,4 +81,6 @@ app.post('/createUser', async (req, res) => {
     }
 })
 
-app.listen(8080)
+app.listen(8080, () => {
+    console.log("server running on port 8080")
+})

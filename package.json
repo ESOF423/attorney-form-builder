@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack --mode development --watch",
     "test": "mocha",
     "test:e2e": "mocha test/e2e",
     "serve": "node server.js"
@@ -16,15 +17,23 @@
   },
   "homepage": "https://github.com/ESOF423/attorney-form-builder#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "faker": "^4.1.0",
     "mocha": "^5.0.0",
-    "puppeteer": "^1.0.0"
+    "puppeteer": "^1.0.0",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "md5": "^2.2.1",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
