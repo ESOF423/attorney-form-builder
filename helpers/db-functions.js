@@ -101,5 +101,18 @@ module.exports = {
         `)
 
         return forms
+    },
+
+    getFormQuestions: async (formId) => {
+        let conn = await getConnection()
+
+        let questions = await query(conn, `
+            SELECT label, value, templateName
+            FROM formQuestions
+                JOIN formQuestionTypes ON formQuestions.formQuestionTypeId = formQuestionTypes.formQuestionTypeId
+            WHERE formId=${formId}
+        `)
+
+        return questions
     }
 }

@@ -20,9 +20,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(session({ 
     secret: 'this-is-a-secret-token', 
-    cookie: { 
-        
-    }
+    cookie: {}
 }));
 
 app.use(express.static(__dirname + '/public'))
