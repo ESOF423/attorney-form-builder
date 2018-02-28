@@ -5,21 +5,48 @@ export default class FormSearch extends Component {
 		super(props)
 
 		this.state = {
-			forms: [{
-                name: 'Will 2018',
-                cost: '2$',
-                attorney: 'Bill Waterson'
-			}]
+			forms: [],
+			name: '',
+			attorney: '',
+			cost: ''
 		}
+
+		this.getForms()
+	}
+
+	getForms = () => {
+		$.ajax({
+			url: 'formSearch/getForms',
+			data: {
+				name: this.state.name,
+				attorney: this.state.attorney,
+				cost: this.state.cost
+			},
+			success: (resp) => {
+				console.log(resp)
+				this.setState({
+					forms: resp.forms
+				})
+			}
+		})
+	}
+
+	handleFilterChange = (e) => {
+		const target = e.target
+		this.setState({
+			[target.name]: target.value
+		}, () => {
+			this.getForms()
+		})
 	}
 
 	render() {
-		const forms = this.state.forms.map(form => {
+		const forms = this.state.forms.map((form, i) => {
 			return (
-				<tr>
-					<td>{form.name}</td>
+				<tr key={i}>
+					<td>{form.formName}</td>
 					<td>{form.cost}</td>
-					<td>{form.attorney}</td>
+					<td>{form.attorneyName}</td>
 					<td>
 						<a href="http://www.google.com">Purchase</a>
 					</td>
@@ -30,6 +57,11 @@ export default class FormSearch extends Component {
 		return (
 			<div>
 				<h1>Search for Forms</h1>
+				<div>
+					<input placeholder="Name" name="name" value={this.state.name} onChange={this.handleFilterChange} />
+					<input placeholder="Attorney" name="attorney" value={this.state.attorney} onChange={this.handleFilterChange} />
+					<input placeholder="Cost" name="cost" value={this.state.cost} onChange={this.handleFilterChange} />
+				</div>
 				<table>
 					<thead>
 						<tr>

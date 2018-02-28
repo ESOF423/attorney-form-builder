@@ -72,6 +72,20 @@ module.exports = {
             INSERT INTO users (email, password)
             VALUES ('${email}', '${pass}');
         `)
+    },
 
+    getForms: async (name, attorney, cost) => {
+        
+        attorney = !!attorney ? `%${attorney}%` : ''
+
+        let conn = await getConnection()
+
+        let files = await query(conn, `
+            SELECT forms.name as formName, forms.cost, attornies.name as attorneyName
+            FROM forms 
+            JOIN attornies ON forms.attorneyId = attornies.attorneyId
+        `)
+
+        return files
     }
 }
