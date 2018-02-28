@@ -81,7 +81,7 @@ module.exports = {
         let conn = await getConnection()
 
         let files = await query(conn, `
-            SELECT forms.name as formName, forms.cost, attornies.name as attorneyName
+            SELECT formId, forms.name as formName, forms.cost, attornies.name as attorneyName
             FROM forms 
             JOIN attornies ON forms.attorneyId = attornies.attorneyId
         `)
