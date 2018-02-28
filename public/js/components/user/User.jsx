@@ -6,20 +6,28 @@ export default class User extends Component {
         super(props)
 
         this.state = {
-            purchasedForms: [{
-                name: 'Will 2018',
-                cost: '$2',
-                date: '02/4/2018',
-                downloadLink: 'http://www.google.com'
-            }]
+            purchasedForms: []
         }
+
+        this.getForms()
+    }
+
+    getForms = () => {
+        $.ajax({
+            url: "/user/getForms",
+            success: (resp) => {
+                this.setState({
+                    purchasedForms: resp.forms
+                })
+            }
+        })
     }
 
     render() {
-        const usersForms = this.state.purchasedForms.map((formData) => {
+        const usersForms = this.state.purchasedForms.map((formData, i) => {
             return (
-                <tr>
-                    <td>{formData.name}</td>
+                <tr key={i}>
+                    <td>{formData.formName}</td>
                     <td>{formData.cost}</td>
                     <td>{formData.date}</td>
                     <td><a href={formData.downloadLink}>Download</a></td>

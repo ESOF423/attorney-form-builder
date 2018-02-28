@@ -15,6 +15,11 @@ router.post('/authenticate', async (req, res) => {
 
         var isAuthenticated = await dbFunctions.authenticate(email, password)
         
+        if (isAuthenticated){
+            req.session.isAuthenticated = true
+            req.session.userEmail = email
+        }
+
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({
             isAuthenticated: isAuthenticated

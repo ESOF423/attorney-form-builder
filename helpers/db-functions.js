@@ -25,7 +25,6 @@ function getConnection() {
 function query(conn, sql){
     return new Promise((resolve, reject) => {
         conn.query(sql, function (err, result) {
-           
             if (err){
                 throw new Error(err)
             }
@@ -43,7 +42,7 @@ module.exports = {
 
         let res = await query(conn, `
             SELECT * 
-            FROM users
+            FROM accounts
             WHERE email='${email}' AND password='${pass}'
         `)
 
@@ -60,7 +59,7 @@ module.exports = {
 
         let emailExistsRes = await query(conn, `
             SELECT *
-            FROM users
+            FROM accounts
             WHERE email='${email}'
         `)
 
@@ -69,7 +68,7 @@ module.exports = {
         }
 
         await query(conn, `
-            INSERT INTO users (email, password)
+            INSERT INTO accounts (email, password)
             VALUES ('${email}', '${pass}');
         `)
     },
@@ -80,12 +79,27 @@ module.exports = {
 
         let conn = await getConnection()
 
-        let files = await query(conn, `
+        let forms = await query(conn, `
             SELECT formId, forms.name as formName, forms.cost, attornies.name as attorneyName
             FROM forms 
             JOIN attornies ON forms.attorneyId = attornies.attorneyId
         `)
 
-        return files
+        return forms
+    },
+
+    getUserForms: async (email) => {
+        let conn = await getConnection()
+
+        let forms = await query(conn, `
+            SELECT forms.name as formName, forms.cost, userForms.purchased
+            FROM userForms
+                JOIN forms ON userForms.formId = forms.formId
+                JOIN users ON userForms.userId = users.userId
+                JOIN accounts ON users.accountId = accounts.accountId
+            WHERE accounts.email='${email}'
+        `)
+
+        return forms
     }
 }

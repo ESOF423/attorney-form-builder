@@ -31,6 +31,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "md5": "^2.2.1",
     "mysql": "^2.15.0",
     "react": "^16.2.0",

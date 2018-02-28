@@ -21,9 +21,7 @@ router.get('/getForms', async (req, res) => {
             forms: forms
         }));
 
-    } catch(err) {
-        
-    }
+    } catch(err) { }
 })
 
 module.exports = router
