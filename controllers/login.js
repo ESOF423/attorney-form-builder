@@ -18,6 +18,7 @@ router.post('/authenticate', async (req, res) => {
         if (isAuthenticated){
             req.session.isAuthenticated = true
             req.session.userEmail = email
+            req.session.userId = await dbFunctions.getUserId(email)
         }
 
         res.setHeader('Content-Type', 'application/json');

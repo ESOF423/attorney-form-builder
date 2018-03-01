@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import '../../../css/pure.min.css'
+
 export default class FormSearch extends Component {
 	constructor(props) {
 		super(props)
@@ -48,7 +50,7 @@ export default class FormSearch extends Component {
 					<td>{form.cost}</td>
 					<td>{form.attorneyName}</td>
 					<td>
-						<a href="http://www.google.com">Purchase</a>
+						<a href={`/purchaseForm?formId=${form.formId}`}>Purchase</a>
 					</td>
 				</tr>
 			)
@@ -62,7 +64,7 @@ export default class FormSearch extends Component {
 					<input placeholder="Attorney" name="attorney" value={this.state.attorney} onChange={this.handleFilterChange} />
 					<input placeholder="Cost" name="cost" value={this.state.cost} onChange={this.handleFilterChange} />
 				</div>
-				<table>
+				<table className="pure-table">
 					<thead>
 						<tr>
 							<th>Name</th>

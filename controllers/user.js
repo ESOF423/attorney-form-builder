@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const router = express.Router()
 
+const latexCompile = require('../helpers/latexCompile.js')
 const dbFunctions = require('../helpers/db-functions.js')
 
 router.get('/', function (req, res) {
@@ -14,7 +15,7 @@ router.get('/purchaseForm', (req, res) => {
 
 router.get('/getForms', async (req, res) => {
     if (req.session.isAuthenticated) {
-        let forms = await dbFunctions.getUserForms(req.session.userEmail)
+        let forms = await dbFunctions.getUserForms(req.session.userId)
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({
@@ -25,6 +26,19 @@ router.get('/getForms', async (req, res) => {
     }
 })
 
+router.get('/downloadForm', async (req, res) => {
+    if (req.session.isAuthenticated){
+        const userFormId = req.query.userFormId
+        const userId = req.session.userId
 
+        console.log(userFormId + " : " + userId)
+
+        const formAnswers = await dbFunctions.getUserFormAnswers(userId, userFormId)
+        console.log(formAnswers)
+        const form = await dbFunctions.getFormFromUserFormId(userFormId)
+
+        latexCompile.compile(form, formAnswers)
+    }
+})
 
 module.exports = router

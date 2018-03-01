@@ -9,9 +9,7 @@ router.get('/', function(req, res) {
 })
 
 router.post('/createUser', async (req, res) => {
-    
     try { 
-        console.log(req.body)
         var email = req.body.email
         var password = req.body.password
         var passwordRetype = req.body.passwordRetype

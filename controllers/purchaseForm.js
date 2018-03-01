@@ -8,15 +8,28 @@ router.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'purchaseForm.html'))
 })
 
-router.get('/questions', async (req, res) => {
-    var formId = 1
+router.get('/getFormData', async (req, res) => {
+    let formId = req.query.formId
 
     const questions = await dbFunctions.getFormQuestions(formId)
+    const formName = (await dbFunctions.getForm(formId)).name
 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
-        questions: questions
+        questions: questions,
+        formName: formName
     }));
+})
+
+router.post('/purchaseForm', async (req, res) => {
+    if (req.session.isAuthenticated){
+        let formId = req.body.formId
+        let answers = JSON.parse(req.body.answers)
+        let userId = req.session.userId
+
+        let userFormId = await dbFunctions.createUserForm(userId, formId)
+        await dbFunctions.createUserFormAnswers(userFormId, answers)
+    }
 })
 
 module.exports = router

@@ -1,7 +1,8 @@
 module.exports = {
     entry: {
         userPage: './public/js/userPageEntry.js',
-        formSearch: './public/js/formSearchEntry.js'
+        formSearch: './public/js/formSearchEntry.js',
+        purchaseForm: './public/js/purchaseFormEntry.js'
     },
 
     output: {
@@ -19,6 +20,10 @@ module.exports = {
                     presets: ['react'],
                     plugins: ['transform-class-properties']
                 }
+            },
+            {
+                test: /\.css?$/,
+                loader: [ 'style-loader', 'css-loader' ]
             }
         ]
     }

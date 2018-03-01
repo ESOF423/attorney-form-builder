@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import '../../lib/dentist.min.js'
+import '../../../css/pure.min.css'
+
 function Text(props) {
     return (
         <div>
@@ -14,39 +17,74 @@ export default class PurchaseForm extends Component {
         super(props)
 
         this.state = {
-            questions: []
+            questions: [],
+            answers: {}
         }
 
-        this.getQuestions()
+        let urlParts = document.URL.extract()
+        this.formId =  urlParts ? urlParts.formId : null 
+
+        this.getFormData()
     }
 
-    getQuestions = () => {
+    getFormData = () => {
         $.ajax({
-            url: '/purchaseForm/getQuestions',
+            url: '/purchaseForm/getFormData',
             data: {
-                formId: 1
+                formId: this.formId
             },
             success: (resp) => {
                 this.setState({
-                    questions: resp.qusetions
+                    questions: resp.questions,
+                    formName: resp.formName
                 })
             } 
         })
     }
 
+    formQuestionChanged = (e) => {
+        let name = e.target.name
+        let value = e.target.value
+
+        this.setState({
+            answers: Object.assign(this.state.answers, { 
+                [name]: value 
+            })
+        })
+    }
+
+    purchaseForm = () => {
+        console.log(this.state.answers)
+        $.ajax({
+            url: '/purchaseForm/purchaseForm',
+            method: 'post',
+            data: {
+                answers: JSON.stringify(this.state.answers),
+                formId: this.formId
+            },
+            success: () =>{}
+        })
+    }
+
     render() {
-        const questionsDom = this.state.questions.map(question => {
+        const questionsDom = this.state.questions.map((question, i) => {
             if (question.templateName == "text"){
-                return <Text label={questions.label} />
+                return (
+                    <div key={i}>
+                        <label>{question.label}</label><br/>
+                        <input type="text" name={question.formQuestionId} onChange={this.formQuestionChanged}/>
+                    </div>
+                )
             }
         })
 
         return (
             <div>
-                <h1>Will 2018</h1>
-                <div>
-
-                </div>
+                <h1>{this.state.formName}</h1>
+                <form className="pure-form">
+                    {questionsDom}
+                    <input type="button" className="pure-button pure-button-primary" value="Purchase Form" onClick={this.purchaseForm}/>
+                </form>
             </div>
         )
     }
