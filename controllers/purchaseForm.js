@@ -29,6 +29,11 @@ router.post('/purchaseForm', async (req, res) => {
 
         let userFormId = await dbFunctions.createUserForm(userId, formId)
         await dbFunctions.createUserFormAnswers(userFormId, answers)
+
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({
+            success: true
+        }));
     }
 })
 

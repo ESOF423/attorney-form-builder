@@ -62,7 +62,9 @@ export default class PurchaseForm extends Component {
                 answers: JSON.stringify(this.state.answers),
                 formId: this.formId
             },
-            success: () =>{}
+            success: () =>{
+                window.location = '/user'
+            }
         })
     }
 

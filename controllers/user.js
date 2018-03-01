@@ -6,7 +6,11 @@ const latexCompile = require('../helpers/latexCompile.js')
 const dbFunctions = require('../helpers/db-functions.js')
 
 router.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../views', 'user.html'))
+    if (req.session.isAuthenticated){
+        res.sendFile(path.join(__dirname, '../views', 'user.html'))
+    } else {
+        res.redirect('/login')
+    }
 })
 
 router.get('/purchaseForm', (req, res) => {
@@ -21,8 +25,6 @@ router.get('/getForms', async (req, res) => {
         res.send(JSON.stringify({
             forms: forms
         }));
-    } else {
-        console.log('Not Authenticated')
     }
 })
 

@@ -38,6 +38,7 @@
                 success: function(resp){
                     if (resp.isAuthenticated){
                         $("#successText").html("Success")
+                        window.location = '/user'
                     } else {
                         $("#errorText").html("Invalid email or password")
                     }
