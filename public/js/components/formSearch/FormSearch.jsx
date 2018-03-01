@@ -59,11 +59,6 @@ export default class FormSearch extends Component {
 		return (
 			<div>
 				<h1>Search for Forms</h1>
-				<div>
-					<input placeholder="Name" name="name" value={this.state.name} onChange={this.handleFilterChange} />
-					<input placeholder="Attorney" name="attorney" value={this.state.attorney} onChange={this.handleFilterChange} />
-					<input placeholder="Cost" name="cost" value={this.state.cost} onChange={this.handleFilterChange} />
-				</div>
 				<table className="pure-table">
 					<thead>
 						<tr>

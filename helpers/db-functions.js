@@ -99,6 +99,18 @@ module.exports = {
         return form[0]
     },
 
+    getForm: async (formId) => {
+        let conn = await getConnection()
+
+        let form = await query(conn, `
+            SELECT *
+            FROM forms
+            WHERE formId=${formId}
+        `)
+
+        return form[0]
+    },
+
     getForms: async (name, attorney, cost) => {
         
         attorney = !!attorney ? `%${attorney}%` : ''
