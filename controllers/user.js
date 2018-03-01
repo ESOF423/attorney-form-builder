@@ -31,13 +31,14 @@ router.get('/downloadForm', async (req, res) => {
         const userFormId = req.query.userFormId
         const userId = req.session.userId
 
-        console.log(userFormId + " : " + userId)
 
         const formAnswers = await dbFunctions.getUserFormAnswers(userId, userFormId)
-        console.log(formAnswers)
         const form = await dbFunctions.getFormFromUserFormId(userFormId)
 
-        latexCompile.compile(form, formAnswers)
+        var directory = await latexCompile.compile(form, formAnswers)
+        
+        res.download(directory + "/src.pdf")
+        latexCompile.cleanup(directory)
     }
 })
 

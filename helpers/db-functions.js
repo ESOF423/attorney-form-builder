@@ -167,7 +167,7 @@ module.exports = {
         `)
     },
 
-    getUserFormAnswers: async (userFormId, userId) => {
+    getUserFormAnswers: async (userId, userFormId) => {
         let conn = await getConnection()
 
         let resp = await query(conn, `
