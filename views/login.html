@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style>
+        #loginForm {
+            max-width: 200px;
+            margin: 40px auto;
+        }
+        .mt2 {
+            margin-top: 10px;
+        }
+        .tac {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm" class="pure-form mt2">
+        <h1>Login</h1>
+        <input type="text" placeholder="email" id="email"><br>
+        <input type="password" class="mt2" placeholder="password" id="password">
+        <input type="submit" class="pure-button mt2" value="Submit">
+        
+        <div id="errorText" style="color: red"></div>
+        <div id="successText"  style="color: green"></div>
+        <div class="mt2">
+            Dont have an account?
+            <a href="/register">register</a>
+        </div>
+    </form>
+
+    <script>
+        $("#loginForm").submit(function(e) {
+            e.preventDefault()
+            
+            var data =  {
+                email: $("#email").val(),
+                password: $("#password").val()
+            }
+
+            $.ajax({
+                method: 'POST',
+                url: '/login/authenticate',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function(resp){
+                    if (resp.isAuthenticated){
+                        $("#successText").html("Success")
+                        window.location = '/user'
+                    } else {
+                        $("#errorText").html("Invalid email or password")
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+</html>

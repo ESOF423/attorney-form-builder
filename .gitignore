@@ -1,4 +1,8 @@
+src/config.json
+downloads/*
+
 .DS_Store
+
 
 # Logs
 logs

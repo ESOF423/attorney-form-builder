@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="registerForm">
+        <input type="text" placeholder="Email" id="email">
+        <input type="password" placeholder="Password" id="password">
+        <input type="password" placeholder="Retype Password" id="passwordRetype">
+        <input type="submit" value="Submit">
+        <div id="errorText" style="color: red"></div>
+        <div id="successText" style="color: green"></div>
+    </form>
+
+    <script>
+        $("#registerForm").submit(function(e) {
+            e.preventDefault()
+            
+            var data =  {
+                email: $("#email").val(),
+                password: $("#password").val(),
+                passwordRetype: $("#passwordRetype").val()
+            }
+
+            $.ajax({
+                method: 'POST',
+                url: '/createUser',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function(resp){
+                    $("#successText").html("Success")
+                },
+                error: function(e){
+                    $("#errorText").html(e.responseJSON.message)
+                }
+            })
+        })
+    </script>
+</body>
+</html>

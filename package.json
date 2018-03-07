@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack --mode development --watch",
     "test": "mocha",
-    "serve": "node server.js"
+    "test:e2e": "mocha test/e2e",
+    "serve": "node app.js"
   },
   "repository": "git+https://github.com/ESOF423/attorney-form-builder.git",
   "author": "Matthew <matthewcnitschke@gmail.com>",
@@ -15,9 +17,29 @@
   },
   "homepage": "https://github.com/ESOF423/attorney-form-builder#readme",
   "devDependencies": {
-    "mocha": "^5.0.0"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
+    "css-loader": "^0.28.10",
+    "faker": "^4.1.0",
+    "mocha": "^5.0.0",
+    "puppeteer": "^1.0.0",
+    "style-loader": "^0.20.2",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "md5": "^2.2.1",
+    "moment": "^2.20.1",
+    "mysql": "^2.15.0",
+    "node-latex": "^2.4.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "uuid": "^3.2.1"
   }
 }
