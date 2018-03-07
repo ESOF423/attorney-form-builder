@@ -10,15 +10,15 @@ router.get('/', function(req, res) {
 
 router.post('/authenticate', async (req, res) => {
     try {
-        var email = req.body.email
-        var password = req.body.password
+        let email = req.body.email
+        let password = req.body.password
 
         let {isAuthenticated, accountId} = await accountModel.authenticate(email, password)
+        let {isAttorney, attorneyId} = await accountModel.isAttorney(accountId)
         
         if (isAuthenticated){
             req.session.isAuthenticated = true
 
-            let {isAttorney, attorneyId} = await accountModel.isAttorney(accountId)
             req.session.isAttorney = isAttorney
             if (isAttorney) {
                 req.session.attorneyId = attorneyId
@@ -30,7 +30,8 @@ router.post('/authenticate', async (req, res) => {
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({
-            isAuthenticated: isAuthenticated
+            isAuthenticated: isAuthenticated,
+            isAttorney: isAttorney
         }));
 
     } catch(err) {

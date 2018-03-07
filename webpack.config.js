@@ -3,6 +3,7 @@ const path = require('path')
 module.exports = {
     entry: {
         userPage: './public/js/userPageEntry.js',
+        attorneyPage: './public/js/attorneyPageEntry.js',
         formSearch: './public/js/formSearchEntry.js',
         purchaseForm: './public/js/purchaseFormEntry.js',
         formBuilder: './public/js/formBuilderEntry.js'

@@ -4,8 +4,7 @@ const db = require('../helpers/db.js')
 module.exports = {
     get: async (email, pass) => {
         pass = md5(pass)
-
-        console.log('pass: ' + pass + ", email: " + email)
+        
         let res = await db.query(`
             SELECT * 
             FROM accounts
