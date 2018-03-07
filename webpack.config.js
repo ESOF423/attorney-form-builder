@@ -1,8 +1,11 @@
+const path = require('path')
+
 module.exports = {
     entry: {
         userPage: './public/js/userPageEntry.js',
         formSearch: './public/js/formSearchEntry.js',
-        purchaseForm: './public/js/purchaseFormEntry.js'
+        purchaseForm: './public/js/purchaseFormEntry.js',
+        formBuilder: './public/js/formBuilderEntry.js'
     },
 
     output: {
@@ -23,8 +26,15 @@ module.exports = {
             },
             {
                 test: /\.css?$/,
-                loader: [ 'style-loader', 'css-loader' ]
+                loader: ['style-loader', 'css-loader']
             }
         ]
+    },
+
+    resolve: {
+        alias: {
+            css: path.resolve(__dirname, 'public/css/'),
+            js: path.resolve(__dirname, 'public/js')
+        }
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import '../../../css/pure.min.css'
+import 'css/pure.min.css'
 
 export default class FormSearch extends Component {
 	constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import moment from 'moment'
 
-import '../../../css/pure.min.css'
+import 'css/pure.min.css'
 
 export default class User extends Component {
     constructor(props) {

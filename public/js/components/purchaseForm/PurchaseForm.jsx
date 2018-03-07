@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import '../../lib/dentist.min.js'
-import '../../../css/pure.min.css'
+import 'js/lib/dentist.min.js'
+import 'css/pure.min.css'
 
 function Text(props) {
     return (

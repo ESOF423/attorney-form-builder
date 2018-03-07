@@ -30,6 +30,7 @@ app.use('/login', require('./controllers/login'))
 app.use('/register', require('./controllers/register'))
 app.use('/user', require('./controllers/user'))
 app.use('/formSearch', require('./controllers/formSearch'))
+app.use('/formBuilder', require('./controllers/formBuilder'))
 app.use('/purchaseForm', require('./controllers/purchaseForm'))
 
 app.listen(8080, () => {

@@ -66,7 +66,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./public/js/purchaseFormEntry.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./public/js/formBuilderEntry.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -402,38 +402,27 @@ eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./p
 
 /***/ }),
 
-/***/ "./public/js/components/purchaseForm/PurchaseForm.jsx":
-/*!************************************************************!*\
-  !*** ./public/js/components/purchaseForm/PurchaseForm.jsx ***!
-  \************************************************************/
+/***/ "./public/js/components/formBuilder/FormBuilder.jsx":
+/*!**********************************************************!*\
+  !*** ./public/js/components/formBuilder/FormBuilder.jsx ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return PurchaseForm; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var js_lib_dentist_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js/lib/dentist.min.js */ \"./public/js/lib/dentist.min.js\");\n/* harmony import */ var js_lib_dentist_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_lib_dentist_min_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var css_pure_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! css/pure.min.css */ \"./public/css/pure.min.css\");\n/* harmony import */ var css_pure_min_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(css_pure_min_css__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\n\nfunction Text(props) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n        'div',\n        null,\n        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n            'label',\n            null,\n            props.label\n        ),\n        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('input', { type: 'text' })\n    );\n}\n\nclass PurchaseForm extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n    constructor(props) {\n        super(props);\n\n        this.getFormData = () => {\n            $.ajax({\n                url: '/purchaseForm/getFormData',\n                data: {\n                    formId: this.formId\n                },\n                success: resp => {\n                    this.setState({\n                        questions: resp.questions,\n                        formName: resp.formName\n                    });\n                }\n            });\n        };\n\n        this.formQuestionChanged = e => {\n            let name = e.target.name;\n            let value = e.target.value;\n\n            this.setState({\n                answers: Object.assign(this.state.answers, {\n                    [name]: value\n                })\n            });\n        };\n\n        this.purchaseForm = () => {\n            console.log(this.state.answers);\n            $.ajax({\n                url: '/purchaseForm/purchaseForm',\n                method: 'post',\n                data: {\n                    answers: JSON.stringify(this.state.answers),\n                    formId: this.formId\n                },\n                success: () => {\n                    window.location = '/user';\n                }\n            });\n        };\n\n        this.state = {\n            questions: [],\n            answers: {}\n        };\n\n        let urlParts = document.URL.extract();\n        this.formId = urlParts ? urlParts.formId : null;\n\n        this.getFormData();\n    }\n\n    render() {\n        const questionsDom = this.state.questions.map((question, i) => {\n            if (question.templateName == \"text\") {\n                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n                    'div',\n                    { key: i },\n                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n                        'label',\n                        null,\n                        question.label\n                    ),\n                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('br', null),\n                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('input', { type: 'text', name: question.formQuestionId, onChange: this.formQuestionChanged })\n                );\n            }\n        });\n\n        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n            'div',\n            null,\n            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n                'h1',\n                null,\n                this.state.formName\n            ),\n            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n                'form',\n                { className: 'pure-form' },\n                questionsDom,\n                react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('input', { type: 'button', className: 'pure-button pure-button-primary', value: 'Purchase Form', onClick: this.purchaseForm })\n            )\n        );\n    }\n}\n\n//# sourceURL=webpack:///./public/js/components/purchaseForm/PurchaseForm.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return FormBuilder; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var css_pure_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! css/pure.min.css */ \"./public/css/pure.min.css\");\n/* harmony import */ var css_pure_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(css_pure_min_css__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n\nclass FormBuilder extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n\tconstructor(props) {\n\t\tsuper(props);\n\t}\n\n\trender() {\n\t\treturn react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t'div',\n\t\t\tnull,\n\t\t\t'Form Builder'\n\t\t);\n\t}\n}\n\n//# sourceURL=webpack:///./public/js/components/formBuilder/FormBuilder.jsx?");
 
 /***/ }),
 
-/***/ "./public/js/lib/dentist.min.js":
-/*!**************************************!*\
-  !*** ./public/js/lib/dentist.min.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("/*! Dentist.js 2015-10-24 */\n!function () {\n  var a,\n      b = { delimiter: \"&\", keyValueSeparator: \"=\", startAfter: \"?\" };String.prototype.extract = function (c) {\n    function d(a) {\n      return (/^(\\-|\\+)?([0-9]+|Infinity)$/.test(a) ? Number(a) : NaN\n      );\n    }if (!(this.length <= 1)) {\n      var c = c || {},\n          e = [],\n          f = {},\n          g = c.delimiter || b.delimiter,\n          h = c.keyValueSeparator || b.keyValueSeparator,\n          i = c.startAfter || b.startAfter,\n          j = d(c.limit) >= 1 ? c.limit : a,\n          k = this.lastIndexOf(i) + 1,\n          l = this.indexOf(h, k);if (!(0 > l)) {\n        var m = 0 > k ? new String(this) : this.substring(k);e = m.split(g, j);var n,\n            o = 0;for (s = e.length; o < s; o++) {\n          n = e[o].split(h, 2);var p = n[1];f[n[0]] = d(p) ? d(p) : p;\n        }return f;\n      }\n    }\n  };\n}();\n\n//# sourceURL=webpack:///./public/js/lib/dentist.min.js?");
-
-/***/ }),
-
-/***/ "./public/js/purchaseFormEntry.js":
-/*!****************************************!*\
-  !*** ./public/js/purchaseFormEntry.js ***!
-  \****************************************/
+/***/ "./public/js/formBuilderEntry.js":
+/*!***************************************!*\
+  !*** ./public/js/formBuilderEntry.js ***!
+  \***************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_purchaseForm_PurchaseForm_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/purchaseForm/PurchaseForm.jsx */ \"./public/js/components/purchaseForm/PurchaseForm.jsx\");\n\n\n\n\n\nObject(react_dom__WEBPACK_IMPORTED_MODULE_1__[\"render\"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_purchaseForm_PurchaseForm_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), document.getElementById('root'));\n\n//# sourceURL=webpack:///./public/js/purchaseFormEntry.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_formBuilder_FormBuilder_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/formBuilder/FormBuilder.jsx */ \"./public/js/components/formBuilder/FormBuilder.jsx\");\n\n\n\n\n\nObject(react_dom__WEBPACK_IMPORTED_MODULE_1__[\"render\"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_formBuilder_FormBuilder_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), document.getElementById('root'));\n\n//# sourceURL=webpack:///./public/js/formBuilderEntry.js?");
 
 /***/ })
 

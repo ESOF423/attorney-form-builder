@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const router = express.Router()
 
-const dbFunctions = require('../helpers/db-functions.js')
+const accountModel = require('../models/account.js')
 
 router.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'login.html'))
@@ -13,13 +13,19 @@ router.post('/authenticate', async (req, res) => {
         var email = req.body.email
         var password = req.body.password
 
-        var isAuthenticated = await dbFunctions.authenticate(email, password)
+        let {isAuthenticated, accountId} = await accountModel.authenticate(email, password)
         
         if (isAuthenticated){
             req.session.isAuthenticated = true
-            req.session.userEmail = email
-            req.session.userId = await dbFunctions.getUserId(email)
-            console.log(req.session.userId)
+
+            let {isAttorney, attorneyId} = await accountModel.isAttorney(accountId)
+            req.session.isAttorney = isAttorney
+            if (isAttorney) {
+                req.session.attorneyId = attorneyId
+            } else {
+                req.session.userEmail = email
+                req.session.userId = (await accountModel.getUser(accountId)).userId
+            }
         }
 
         res.setHeader('Content-Type', 'application/json');
@@ -28,7 +34,7 @@ router.post('/authenticate', async (req, res) => {
         }));
 
     } catch(err) {
-        error(res, err)
+        console.error(err)
     }
 })
 

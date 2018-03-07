@@ -3,7 +3,9 @@ const express = require('express')
 const router = express.Router()
 
 const latexCompile = require('../helpers/latexCompile.js')
-const dbFunctions = require('../helpers/db-functions.js')
+
+const userFormModel = require('../models/userForm.js')
+const formModel = require('../models/form.js')
 
 router.get('/', function (req, res) {
     if (req.session.isAuthenticated){
@@ -19,7 +21,7 @@ router.get('/purchaseForm', (req, res) => {
 
 router.get('/getForms', async (req, res) => {
     if (req.session.isAuthenticated) {
-        let forms = await dbFunctions.getUserForms(req.session.userId)
+        let forms = await userFormModel.getUsers(req.session.userId)
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({
@@ -33,8 +35,8 @@ router.get('/downloadForm', async (req, res) => {
         const userFormId = req.query.userFormId
         const userId = req.session.userId
         
-        const formAnswers = await dbFunctions.getUserFormAnswers(userId, userFormId)
-        const form = await dbFunctions.getFormFromUserFormId(userFormId)
+        const formAnswers = await userFormModel.getAnswers(userFormId)
+        const form = await userFormModel.getForm(userFormId)
 
         var directory = await latexCompile.compile(form, formAnswers)
         res.download(directory + "/src.pdf", `${form.name}.pdf`)
