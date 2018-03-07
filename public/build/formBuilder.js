@@ -402,6 +402,18 @@ eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./p
 
 /***/ }),
 
+/***/ "./public/js/components/formBuilder/ConditionalQuestion.jsx":
+/*!******************************************************************!*\
+  !*** ./public/js/components/formBuilder/ConditionalQuestion.jsx ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return ConditionalQuestion; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nclass ConditionalQuestion extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n\tconstructor(props) {\n\t\tsuper(props);\n\t}\n\n\trender() {\n\t\treturn react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t\"div\",\n\t\t\tnull,\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", { type: \"text\", placeholder: \"Label\" }),\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", { type: \"button\", value: \"Delete\" })\n\t\t);\n\t}\n}\n\n//# sourceURL=webpack:///./public/js/components/formBuilder/ConditionalQuestion.jsx?");
+
+/***/ }),
+
 /***/ "./public/js/components/formBuilder/FormBuilder.jsx":
 /*!**********************************************************!*\
   !*** ./public/js/components/formBuilder/FormBuilder.jsx ***!
@@ -410,7 +422,19 @@ eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./p
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return FormBuilder; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var css_pure_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! css/pure.min.css */ \"./public/css/pure.min.css\");\n/* harmony import */ var css_pure_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(css_pure_min_css__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n\nclass FormBuilder extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n\tconstructor(props) {\n\t\tsuper(props);\n\t}\n\n\trender() {\n\t\treturn react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t'div',\n\t\t\tnull,\n\t\t\t'Form Builder'\n\t\t);\n\t}\n}\n\n//# sourceURL=webpack:///./public/js/components/formBuilder/FormBuilder.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return FormBuilder; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var css_pure_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! css/pure.min.css */ \"./public/css/pure.min.css\");\n/* harmony import */ var css_pure_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(css_pure_min_css__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _Question_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Question.jsx */ \"./public/js/components/formBuilder/Question.jsx\");\n/* harmony import */ var _ConditionalQuestion_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ConditionalQuestion.jsx */ \"./public/js/components/formBuilder/ConditionalQuestion.jsx\");\n\n\n\n\n\n\n\nclass FormBuilder extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n\tconstructor(props) {\n\t\tsuper(props);\n\n\t\tthis.addQuestion = () => {\n\t\t\tthis.setState({\n\t\t\t\tquestions: this.state.questions.concat({\n\t\t\t\t\tlabel: '',\n\t\t\t\t\ttype: null\n\t\t\t\t})\n\t\t\t});\n\t\t};\n\n\t\tthis.addConditional = () => {\n\t\t\tthis.setState({\n\t\t\t\tquestions: this.state.questions.concat({\n\t\t\t\t\tconditional: true,\n\t\t\t\t\tlabel: '',\n\t\t\t\t\tquestions: []\n\t\t\t\t})\n\t\t\t});\n\t\t};\n\n\t\tthis.state = {\n\t\t\tquestions: []\n\t\t};\n\t}\n\n\trender() {\n\t\tlet questions = this.state.questions.map((questionData, i) => {\n\t\t\tif (questionData.conditional) {\n\t\t\t\treturn react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ConditionalQuestion_jsx__WEBPACK_IMPORTED_MODULE_3__[\"default\"], { key: i, label: questionData.label });\n\t\t\t} else {\n\t\t\t\treturn react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Question_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], { key: i });\n\t\t\t}\n\t\t});\n\n\t\treturn react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t'div',\n\t\t\tnull,\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t\t'h1',\n\t\t\t\tnull,\n\t\t\t\t'Form Builder'\n\t\t\t),\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t\t'div',\n\t\t\t\tnull,\n\t\t\t\tquestions\n\t\t\t),\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('input', { type: 'button', value: 'New Question', className: 'pure-button', onClick: this.addQuestion }),\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('input', { type: 'button', value: 'New Conditional', className: 'pure-button', onClick: this.addConditional })\n\t\t);\n\t}\n}\n\n//# sourceURL=webpack:///./public/js/components/formBuilder/FormBuilder.jsx?");
+
+/***/ }),
+
+/***/ "./public/js/components/formBuilder/Question.jsx":
+/*!*******************************************************!*\
+  !*** ./public/js/components/formBuilder/Question.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Question; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nclass Question extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n\tconstructor(props) {\n\t\tsuper(props);\n\t}\n\n\trender() {\n\t\treturn react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t\"div\",\n\t\t\tnull,\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", { type: \"text\", placeholder: \"Label\" }),\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t\t\"select\",\n\t\t\t\tnull,\n\t\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t\t\t\"option\",\n\t\t\t\t\t{ value: \"\", disabled: true, selected: true },\n\t\t\t\t\t\"Type\"\n\t\t\t\t),\n\t\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\n\t\t\t\t\t\"option\",\n\t\t\t\t\tnull,\n\t\t\t\t\t\"Textbox\"\n\t\t\t\t)\n\t\t\t),\n\t\t\treact__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", { type: \"button\", value: \"Delete\" })\n\t\t);\n\t}\n}\n\n//# sourceURL=webpack:///./public/js/components/formBuilder/Question.jsx?");
 
 /***/ }),
 

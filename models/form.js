@@ -10,6 +10,15 @@ module.exports = {
 
         return form[0]
     },
+    getByAttorney: async (attorneyId) => {
+        let forms = await db.query(`
+            SELECT name as formName, cost
+            FROM forms
+            WHERE attorneyId = ${attorneyId}
+        `)
+
+        return forms
+    },
     getQuestions: async (formId) => {
         let questions = await db.query(`
             SELECT formQuestionId, label, value, templateName
