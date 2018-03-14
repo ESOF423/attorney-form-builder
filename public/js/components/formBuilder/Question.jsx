@@ -8,9 +8,12 @@ export default class Question extends Component {
 	}
 
 	onChange = (e) => {
-		this.props.onChange({
+		this.props.onChange(Object.assign({
+			label: this.props.label,
+			type: this.props.type
+		}, {
 			[e.target.name]: e.target.value
-		})
+		}))
 	}
 
 	onDelete = (e) => {
@@ -19,16 +22,17 @@ export default class Question extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="m1">
 				<input 
 					type="text"
 					name="label" 
 					value={this.props.label} 
 					onChange={this.onChange} 
 					placeholder="Label"
+					className="mr1"
 				/>
 
-                <select name="type" value={this.props.type} onChange={this.onChange}>
+                <select name="type" value={this.props.type} onChange={this.onChange} className="mr1">
                     <option value="" disabled>Type</option>
                     <option>Textbox</option>
 				</select>

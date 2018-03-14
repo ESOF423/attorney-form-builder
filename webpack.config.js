@@ -44,6 +44,7 @@ module.exports = {
 
     resolve: {
         alias: {
+            'node_modules': path.resolve(__dirname, 'node_modules'),
             css: path.resolve(__dirname, 'public/css/'),
             js: path.resolve(__dirname, 'public/js')
         }

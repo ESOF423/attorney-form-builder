@@ -54,14 +54,15 @@ export default class QuestionContainer extends Component {
 		})
 	}
 
-	questionContainerChanged = (i, data) => {
-		debugger
-		
+	questionChanged = (i, data) => {
 		let questions = this.props.questions
 
 		questions[i] = data
 
-		this.onChange(data)
+		this.onChange({
+			label: this.props.label,
+			questions: questions
+		})
 	}
 
 	render() {
@@ -73,7 +74,7 @@ export default class QuestionContainer extends Component {
 					label={item.label} 
 					questions={item.questions}
 					onChange={(data) => {
-						this.questionContainerChanged(i, data)
+						this.questionChanged(i, data)
 					}}
 				/>
 			} else {
@@ -89,21 +90,23 @@ export default class QuestionContainer extends Component {
 		})
 		
 		return (
-			<div>
+			<div className={`question-container ${!this.props.isRoot ? 'ml1' : ''}`}>
 				{ !this.props.isRoot &&
-					<input 
-						type="text" 
-						name="label" 
-						placeholder="Label" 
-						value={this.props.label} 
-						onChange={this.labelChanged} />
+					<textarea cols="40" rows="1"
+					name="label" 
+					placeholder="Label" 
+					value={this.props.label} 
+					onChange={this.labelChanged} >
+
+					</textarea>
+
 				}
 				
-				<div className={!this.props.isRoot ? 'ml1' : ''}>
+				<div>
 					{questions}
 				</div>
 
-				<div>
+				<div className="mt1">
 					<input type="button" value="Add Question" onClick={this.addQuestion}/>
 					<input type="button" value="Add Container" onClick={this.addQuestionContainer}/>
 				</div>
