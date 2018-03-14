@@ -1,0 +1,43 @@
+.df {
+    display: flex;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.tac {
+    text-align: center;
+}
+
+.ml1 {
+    margin-left: 1rem;
+}
+
+.delete-button {
+    color: red;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    &:hover {
+        color: darken(red, 20%);
+    }
+}
+
+.question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    flex-wrap: wrap;
+
+    & > * {
+        margin-right: .5rem;
+    }
+
+    .conditional-question-questions {
+        flex-grow: 1;
+        border: solid 1px black;
+    }
+}
