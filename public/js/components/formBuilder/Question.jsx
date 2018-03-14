@@ -16,10 +16,6 @@ export default class Question extends Component {
 		}))
 	}
 
-	onDelete = (e) => {
-		this.props.onDelete()
-	}
-
 	render() {
 		return (
 			<div className="m1">
@@ -37,7 +33,7 @@ export default class Question extends Component {
                     <option>Textbox</option>
 				</select>
 
-				<span onClick={this.onDelete}>
+				<span onClick={this.props.onDelete}>
 					<i className="fas fa-minus-circle delete-button"></i>
 				</span>
 				

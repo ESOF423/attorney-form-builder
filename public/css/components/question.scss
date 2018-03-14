@@ -1,6 +1,15 @@
+.pure-form {
+    label {
+        font-size: 85%;
+        margin-left: .2rem;
+        display: block;
+    }
+}
+
 .question-container {
-    border: solid 2px #000;
     padding: .5rem;
+
+    border-left: solid 5px lightgreen;
 }
 
 .delete-button {
