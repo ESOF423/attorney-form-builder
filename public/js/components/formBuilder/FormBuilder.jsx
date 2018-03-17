@@ -34,8 +34,9 @@ export default class FormBuilder extends Component {
 	submit = () => {
 		$.ajax({
 			url: '/formBuilder/submitForm',
+			method: 'post',
 			data: {
-				name: this.state.formName,
+				name: this.state.name,
 				cost: this.state.cost,
 				state: this.state.state,
 				questions: JSON.stringify(this.state.questions)

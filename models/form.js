@@ -12,8 +12,8 @@ module.exports = {
     },
     create: async (attorneyId, name, cost, state) => {
         let resp = await db.query(`
-            INSERT INTO forms (attorneyId, name, cost)
-            VALUES (${attorneyId}, '${name}', ${cost})
+            INSERT INTO forms (attorneyId, name, cost, state)
+            VALUES (${attorneyId}, '${name}', ${cost}, '${state}')
         `)
 
         return resp.insertId
