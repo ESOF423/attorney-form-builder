@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compativle" content="ie=edge">
+	<title>Template</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<form id="selectForm">
+		<input type="form_state" placeholder="State" id="form_state">
+		<input type="title" placeholder="Form Title" id="title">
+	</form>
+
+	<script>
+		$("#createForm").submit(function(e)){
+			e.preventDefault()
+
+			var createForm = {
+				form_state: $("#form_state").val(),
+				title: $("#title").val(),
+				attorney_firstname: s("#attorney_firstname").val(),
+				attorney_lastname: s("#attorney_lastname").val()
+			}
+
+			$.ajax({
+				method: 'POST',
+				url: '/createForm',
+				data: JSON.stringify(data),
+				contentType: 'application/json',
+				success: function(resp){
+					$("#successText").html("Success")
+				},
+				errot: function(e){
+					$("#errorText").html(e.responseJSON.message)
+				}
+			})
+		})
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+			}
+		}
+	</script>
