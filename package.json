@@ -7,7 +7,8 @@
     "dev": "webpack --mode development --watch",
     "test": "mocha",
     "test:e2e": "mocha test/e2e",
-    "serve": "node app.js"
+    "serve": "node app.js",
+    "t": "mocha test/e2e/form-builder.test.js"
   },
   "repository": "git+https://github.com/ESOF423/attorney-form-builder.git",
   "author": "Matthew <matthewcnitschke@gmail.com>",
