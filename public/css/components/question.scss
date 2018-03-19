@@ -1,0 +1,40 @@
+.pure-form {
+    label {
+        font-size: 85%;
+        margin-left: .2rem;
+        display: block;
+    }
+}
+
+.question-container {
+    padding: .5rem;
+
+    border-left: solid 5px lightgreen;
+}
+
+.delete-button {
+    color: red;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    &:hover {
+        color: darken(red, 20%);
+    }
+}
+
+.question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    flex-wrap: wrap;
+
+    & > * {
+        margin-right: .5rem;
+    }
+
+    .conditional-question-questions {
+        flex-grow: 1;
+        border: solid 1px black;
+    }
+}

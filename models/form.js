@@ -10,6 +10,23 @@ module.exports = {
 
         return form[0]
     },
+    create: async (attorneyId, name, cost, state) => {
+        let resp = await db.query(`
+            INSERT INTO forms (attorneyId, name, cost, state)
+            VALUES (${attorneyId}, '${name}', ${cost}, '${state}')
+        `)
+
+        return resp.insertId
+    },
+    getByAttorney: async (attorneyId) => {
+        let forms = await db.query(`
+            SELECT name as formName, cost
+            FROM forms
+            WHERE attorneyId = ${attorneyId}
+        `)
+
+        return forms
+    },
     getQuestions: async (formId) => {
         let questions = await db.query(`
             SELECT formQuestionId, label, value, templateName
