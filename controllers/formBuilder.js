@@ -34,18 +34,16 @@ router.post('/submitForm', async (req, res) => {
 })
 
 async function createQuestions(formId, parentId, questions){
-    console.log(questions)
     for(let i = 0; i < questions.length; i++){
         let question = questions[i]
 
         if (question.hasOwnProperty("questions")){
-            console.log("CHILD")
             // question is a container question, recurse.
             let newParentId = await formQuestionContainerModel.create(formId, parentId, question.label)
             createQuestions(formId, newParentId, question.questions)
         } else {
             // question is just a regular question
-            await formQuestionModel.create(parentId, question.label, 1)
+            await formQuestionModel.create(formId, parentId, question.label, 1)
         }
 
     }
