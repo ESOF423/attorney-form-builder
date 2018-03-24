@@ -6,6 +6,7 @@ const auth = require('../middlewares/auth.js')
 
 const formModel = require('../models/form.js')
 const userFormModel = require('../models/userForm.js')
+const paymentModel = require('../models/payment.js')
 
 router.use(auth.user)
 
@@ -30,6 +31,8 @@ router.post('/purchaseForm', async (req, res) => {
     let formId = req.body.formId
     let answers = JSON.parse(req.body.answers)
     let userId = req.session.userId
+
+    await paymentModel.makePayment(200, "source", `Charge for formId: ${formId}`)
 
     let userFormId = await userFormModel.create(userId, formId)
     await userFormModel.createAnswers(userFormId, answers)

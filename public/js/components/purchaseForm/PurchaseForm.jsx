@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import StripePayment from './StripePayment.jsx' 
+
 import 'js/lib/dentist.min.js'
 import 'css/pure.min.css'
 
@@ -54,7 +56,6 @@ export default class PurchaseForm extends Component {
     }
 
     purchaseForm = () => {
-        console.log(this.state.answers)
         $.ajax({
             url: '/purchaseForm/purchaseForm',
             method: 'post',
@@ -85,6 +86,7 @@ export default class PurchaseForm extends Component {
                 <h1>{this.state.formName}</h1>
                 <form className="pure-form">
                     {questionsDom}
+                    <StripePaymnet />
                     <input type="button" className="pure-button pure-button-primary" value="Purchase Form" onClick={this.purchaseForm}/>
                 </form>
             </div>
