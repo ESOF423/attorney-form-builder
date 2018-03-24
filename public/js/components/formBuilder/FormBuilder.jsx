@@ -89,6 +89,7 @@ export default class FormBuilder extends Component {
 				<div className="mt1">
 					<input type="button" className="pure-button pure-button-primary" value="Submit" onClick={this.submit}/>
 				</div>
+				{JSON.stringify(this.state.questions)}
 			</div>
 		)
 	}
