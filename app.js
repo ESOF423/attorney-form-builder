@@ -33,7 +33,7 @@ app.use('/attorney', require('./controllers/attorney'))
 app.use('/formSearch', require('./controllers/formSearch'))
 app.use('/formBuilder', require('./controllers/formBuilder'))
 app.use('/purchaseForm', require('./controllers/purchaseForm'))
-
+app.use('/formTemplate', require('./controllers/formTemplate'))
 app.listen(8080, () => {
     console.log('Listening on port 8080...')
 })
