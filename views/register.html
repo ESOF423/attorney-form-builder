@@ -18,6 +18,13 @@
         <div id="successText" style="color: green"></div>
     </form>
 
+    <form id="attorneyRegisterForm" style="display:none">
+      <input type="text" placeholder="Full Name" id="fullName">
+      <input type ="text" placeholder="Business name" id="about">
+    </form>  
+
+    <button type="button" onclick="document.getElementById('attorneyRegisterForm').style.display='block'">Click here to register as an attorney</button>
+
     <script>
         $("#registerForm").submit(function(e) {
             e.preventDefault()
