@@ -24,12 +24,13 @@ router.get('/getFormData', async (req, res) => {
 
     let questionData = generateQuestionJson(containers, questions)
 
-    const formName = (await formModel.get(formId)).name
+    const formData = await formModel.get(formId)
 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
         questions: questionData,
-        formName: formName
+        formName: formData.name,
+        formCost: formData.cost
     }));
 })
 

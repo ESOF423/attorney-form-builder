@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-// import StripePayment from './StripePayment.jsx'
+import StripePayment from './StripePayment.jsx'
 import AskQuestion from './AskQuestion.jsx'
 import AskQuestionContainer from './AskQuestionContainer.jsx'
 
@@ -22,7 +22,8 @@ export default class PurchaseForm extends Component {
 
         this.state = {
             questions: [],
-            answers: {}
+            answers: {},
+            cost: 0
         }
 
         let urlParts = document.URL.extract()
@@ -40,7 +41,8 @@ export default class PurchaseForm extends Component {
             success: (resp) => {
                 this.setState({
                     questions: resp.questions,
-                    formName: resp.formName
+                    formName: resp.formName,
+                    formCost: resp.formCost
                 })
             }
         })
@@ -99,11 +101,12 @@ export default class PurchaseForm extends Component {
         return (
             <div>
                 <h1>{this.state.formName}</h1>
-                <form className="pure-form">
+                <h2>This form costs: ${this.state.formCost}</h2>
+                <div className="pure-form">
                     {questionsDom}
-                    {/* <StripePayment /> */}
+                    <StripePayment />
                     <input type="button" className="pure-button pure-button-primary" value="Purchase Form" onClick={this.purchaseForm} />
-                </form>
+                </div>
             </div>
         )
     }

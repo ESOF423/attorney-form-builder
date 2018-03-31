@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
-import 'js/lib/stripe.js'
 import 'css/stripe.css'
 
 export default class StripePayment extends Component {
-    constructor() {
-
+    constructor(props) {
+        super(props)
     }
 
     componentDidMount() {
@@ -70,14 +69,16 @@ export default class StripePayment extends Component {
 
     render() {
         return (
-            <form action="/charge" method="post" id="payment-form">
-                <div class="form-row">
-                    <label for="card-element">Credit or debit card</label>
-                    <div id="card-element"></div>
-                    <div id="card-errors" role="alert"></div>
-                </div>
-                <button>Submit Payment</button>
-            </form>
+            <div>
+                <form action="/charge" method="post" id="payment-form">
+                    <div className="form-row">
+                        <label htmlFor="card-element">Credit or debit card</label>
+                        <div id="card-element"></div>
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+                    <button>Submit Payment</button>
+                </form>
+            </div>
         );
     }
 }
