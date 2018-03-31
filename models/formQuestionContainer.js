@@ -2,7 +2,6 @@ const db = require('../helpers/db.js')
 
 module.exports = {
     create: async (formId, parent, label) => {
-        console.log("add formQuestionContainer: [" + formId + ", " + label + ", " + parent + "]")
         let query = ''
 
         if (parent){
@@ -30,5 +29,12 @@ module.exports = {
         `)
 
         return res.insertId
+    },
+    get: async (formId) => {
+        return await db.query(`
+            SELECT * 
+            FROM formQuestionContainers
+            WHERE formId = ${formId}
+        `)
     }
 }

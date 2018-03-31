@@ -22,6 +22,7 @@ router.post('/submitForm', async (req, res) => {
         let attorneyId = req.session.attorneyId
 
         let formId = await formModel.create(attorneyId, name, cost, state)
+        console.log(formId)
 
         let rootContainerId = await formQuestionContainerModel.createRoot(formId)
         await createQuestions(formId, rootContainerId, questions)

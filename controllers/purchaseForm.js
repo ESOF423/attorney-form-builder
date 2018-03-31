@@ -5,6 +5,8 @@ const router = express.Router()
 const auth = require('../middlewares/auth.js')
 
 const formModel = require('../models/form.js')
+const formQuestion = require('../models/formQuestion.js')
+const formQuestionContainer = require('../models/formQuestionContainer.js')
 const userFormModel = require('../models/userForm.js')
 const paymentModel = require('../models/payment.js')
 
@@ -17,12 +19,16 @@ router.get('/', function(req, res) {
 router.get('/getFormData', async (req, res) => {
     let formId = req.query.formId
 
-    const questions = await formModel.getQuestions(formId)
+    const containers = await formQuestionContainer.get(formId) 
+    const questions = await formQuestion.get(formId)
+
+    let questionData = generateQuestionJson(containers, questions)
+
     const formName = (await formModel.get(formId)).name
 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
-        questions: questions,
+        questions: questionData,
         formName: formName
     }));
 })
@@ -42,5 +48,46 @@ router.post('/purchaseForm', async (req, res) => {
         success: true
     }));
 })
+
+function generateQuestionJson(containers, questions) {
+    // get the root container by its null parent
+    let rootContainer = containers.find(el => {
+        return el.parent == null
+    })
+
+    let res = generateQuestionJsonAux(rootContainer, containers, questions)
+
+    // because we are at the root, ignore the label, it has none
+    return [...res.questions] 
+}
+
+function generateQuestionJsonAux(parentContainer, containers, questions){
+    let appendObj = {}
+
+    let parentQuestions = questions.filter(el => {
+        return el.formQuestionContainerId == parentContainer.formQuestionContainerId
+    }).map(el => {
+        return {
+            label: el.label,
+            type: el.formQuestionTypeId
+        }
+    })
+
+    let parentContainers = containers.filter(el => {
+        return el.parent == parentContainer.formQuestionContainerId
+    }).map(el => {
+        return generateQuestionJsonAux(el, containers, questions)
+    })
+
+    if (parentQuestions.length > 0) {
+        appendObj.questions = parentQuestions
+    }
+
+    return {
+        label: parentContainer.label,
+        questions: [...parentQuestions, ...parentContainers]
+    }
+}
+
 
 module.exports = router
