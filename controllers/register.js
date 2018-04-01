@@ -26,4 +26,25 @@ router.post('/createUser', async (req, res) => {
     }
 })
 
+
+router.post('/createAttorney', async (req, res) => {
+    try { 
+        var email = req.body.email
+        var password = req.body.password
+        var passwordRetype = req.body.passwordRetype
+	var name = req.body.name
+	var about = req.body.about
+	
+        await accountModel.createAccount(email, password, passwordRetype, name, about)
+
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({
+            success: true
+        }));
+
+    } catch(err){
+       error(res, err)
+    }
+})
+
 module.exports = router
