@@ -31,16 +31,20 @@ router.get('/getFormData', async (req, res) => {
     res.send(JSON.stringify({
         questions: questionData,
         formName: formData.name,
-        formCost: formData.cost
+        formCost: parseFloat((formData.cost)/100) // due to stripe integer payment thing
     }));
 })
 
 router.post('/purchaseForm', async (req, res) => {
     let formId = req.body.formId
+    let stripeTokenObj = req.body.stripeToken
     let answers = JSON.parse(req.body.answers)
     let userId = req.session.userId
 
-    //await paymentModel.makePayment(200, "source", `Charge for formId: ${formId}`)
+    // retreive the form from the db, so users cant modify the cost of the form upon submission
+    let form = await formModel.get(formId)
+
+    await paymentModel.makePayment(form.cost, stripeTokenObj.id, `Charge for formId: ${formId}(${form.name}), on userId: ${userId}`)
 
     let userFormId = await userFormModel.create(userId, formId)
     await userFormAnswerModel.createMultiple(userFormId, answers)

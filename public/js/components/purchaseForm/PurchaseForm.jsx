@@ -7,15 +7,6 @@ import AskQuestionContainer from './AskQuestionContainer.jsx'
 import 'js/lib/dentist.min.js'
 import 'css/pure.min.css'
 
-function Text(props) {
-    return (
-        <div>
-            <label>{props.label}</label>
-            <input type="text" />
-        </div>
-    )
-}
-
 export default class PurchaseForm extends Component {
     constructor(props) {
         super(props)
@@ -60,7 +51,7 @@ export default class PurchaseForm extends Component {
         })
     }
 
-    purchaseForm = () => {
+    purchaseForm = (stripeToken) => {
         // moves answers from a key value format to an array of rows format
         let transformedAnswers = Object.keys(this.state.answers).map(key => {
             return {
@@ -74,7 +65,8 @@ export default class PurchaseForm extends Component {
             method: 'post',
             data: {
                 answers: JSON.stringify(transformedAnswers),
-                formId: this.formId
+                formId: this.formId,
+                stripeToken: stripeToken
             },
             success: () => {
                 window.location = '/user'
@@ -119,8 +111,7 @@ export default class PurchaseForm extends Component {
                 <h2>This form costs: ${this.state.formCost}</h2>
                 <div className="pure-form">
                     {questionsDom}
-                    <StripePayment />
-                    <input type="button" className="pure-button pure-button-primary" value="Purchase Form" onClick={this.purchaseForm} />
+                    <StripePayment onSubmit={this.purchaseForm}/>
                 </div>
             </div>
         )

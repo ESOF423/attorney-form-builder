@@ -2,5 +2,8 @@
     "mysql": {
         "user": "root",
         "password": "esof@MSU"
+    },
+    "stripe": {
+        "serverKey": "sk_test_F0ujkgtxvSMdQroDCahdAhGI"
     }
 }

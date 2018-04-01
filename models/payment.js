@@ -1,6 +1,5 @@
-const stripe = require("stripe")(
-    "sk_test_F0ujkgtxvSMdQroDCahdAhGI"
-);
+const serverKey = require('../helpers/config.json').stripe.serverKey
+const stripe = require("stripe")(serverKey);
 
 module.exports = {
     makePayment: (amount, source, description) => {
