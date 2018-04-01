@@ -35,7 +35,7 @@ router.post('/createAttorney', async (req, res) => {
 	var name = req.body.name
 	var about = req.body.about
 	
-        await accountModel.createAccount(email, password, passwordRetype, name, about)
+        await accountModel.createAttorney(email, password, passwordRetype, name, about)
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({
