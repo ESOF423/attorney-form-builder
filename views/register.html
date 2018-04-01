@@ -25,6 +25,34 @@
 
     <button type="button" onclick="document.getElementById('attorneyRegisterForm').style.display='block'">Click here to register as an attorney</button>
 
+
+    <script>
+        $("#attorneyRegisterForm").submit(function(e)){
+	    e.preventDefault()
+
+	    var data = {
+	        email: $("#email").val(),
+                password: $("#password").val(),
+                passwordRetype: $("#passwordRetype").val(),
+	        name: $("#fullName").val(),
+	        businessName: $("#about").val()
+	    }
+
+	$.ajax({
+	    method: 'POST',
+	    url: '/createAttorney',
+	    data: JSON.stringify(data),
+	    contentType: 'application/json'
+	    success: function(resp){
+                $("#successText").html("Success")
+            },
+            error: function(e){
+                $("#errorText").html(e.responseJSON.message)
+                
+	})
+      })
+    </script>
+  
     <script>
         $("#registerForm").submit(function(e) {
             e.preventDefault()
