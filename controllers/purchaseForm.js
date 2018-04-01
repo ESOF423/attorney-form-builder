@@ -8,6 +8,7 @@ const formModel = require('../models/form.js')
 const formQuestion = require('../models/formQuestion.js')
 const formQuestionContainer = require('../models/formQuestionContainer.js')
 const userFormModel = require('../models/userForm.js')
+const userFormAnswerModel = require('../models/userFormAnswer.js')
 const paymentModel = require('../models/payment.js')
 
 router.use(auth.user)
@@ -39,10 +40,10 @@ router.post('/purchaseForm', async (req, res) => {
     let answers = JSON.parse(req.body.answers)
     let userId = req.session.userId
 
-    await paymentModel.makePayment(200, "source", `Charge for formId: ${formId}`)
+    //await paymentModel.makePayment(200, "source", `Charge for formId: ${formId}`)
 
     let userFormId = await userFormModel.create(userId, formId)
-    await userFormModel.createAnswers(userFormId, answers)
+    await userFormAnswerModel.createMultiple(userFormId, answers)
 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
@@ -69,6 +70,7 @@ function generateQuestionJsonAux(parentContainer, containers, questions){
         return el.formQuestionContainerId == parentContainer.formQuestionContainerId
     }).map(el => {
         return {
+            formQuestionId: el.formQuestionId,
             label: el.label,
             type: el.formQuestionTypeId
         }

@@ -5,11 +5,18 @@ export default class AskQuestion extends Component {
         super(props)
     }
 
+    onChange = (e) => {
+        this.props.onChange({
+            answer: e.target.value,
+            formQuestionId: this.props.formQuestionId
+        })
+    }
+
     render() {
         return (
             <div>
                 <label>{this.props.label}</label><br/>
-                <input type="text" />
+                <input type="text" onChange={this.onChange} />
             </div>
         );
     }

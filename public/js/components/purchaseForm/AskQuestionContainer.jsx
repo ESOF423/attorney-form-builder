@@ -24,10 +24,19 @@ export default class AskQuestionContainer extends Component {
             questionsDom = this.props.questions.map((el, i) => {
                 if (el.questions) {
                     // el is a container question
-                    return <AskQuestionContainer key={i} label={el.label} questions={el.questions} />
+                    return <AskQuestionContainer 
+                        key={i} 
+                        label={el.label} 
+                        questions={el.questions} 
+                        onChange={this.props.onChange}/>
                 } else {
                     // el is a regular question
-                    return <AskQuestion key={i} label={el.label} type={el.type} />
+                    return <AskQuestion 
+                        key={i} 
+                        label={el.label} 
+                        type={el.type} 
+                        formQuestionId={el.formQuestionId} 
+                        onChange={this.props.onChange}/>
                 }
             })
         }

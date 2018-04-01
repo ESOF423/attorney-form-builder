@@ -39,6 +39,7 @@ export default class PurchaseForm extends Component {
                 formId: this.formId
             },
             success: (resp) => {
+                debugger
                 this.setState({
                     questions: resp.questions,
                     formName: resp.formName,
@@ -60,11 +61,19 @@ export default class PurchaseForm extends Component {
     }
 
     purchaseForm = () => {
+        // moves answers from a key value format to an array of rows format
+        let transformedAnswers = Object.keys(this.state.answers).map(key => {
+            return {
+                answer: this.state.answers[key],
+                formQuestionId: key
+            }
+        })
+
         $.ajax({
             url: '/purchaseForm/purchaseForm',
             method: 'post',
             data: {
-                answers: JSON.stringify(this.state.answers),
+                answers: JSON.stringify(transformedAnswers),
                 formId: this.formId
             },
             success: () => {
@@ -73,27 +82,33 @@ export default class PurchaseForm extends Component {
         })
     }
 
+    handleChange = (e) => {
+        let newAnswers = this.state.answers
+        newAnswers[e.formQuestionId] = e.answer
+
+        this.setState({
+            answers: newAnswers
+        })
+    }
+
 
     render() {
-        // const questionsDom = this.state.questions.map((question, i) => {
-        //     if (question.templateName.toLowerCase() == "textbox"){
-        //         return (
-        //             <div key={i}>
-        //                 <label>{question.label}</label><br/>
-        //                 <input type="text" name={question.formQuestionId} onChange={this.formQuestionChanged}/>
-        //             </div>
-        //         )
-        //     }
-        // })
-
-
         const questionsDom = this.state.questions.map((el, i) => {
             if (el.questions) {
                 // el is a container question
-                return <AskQuestionContainer key={i} label={el.label} questions={el.questions} />
+                return <AskQuestionContainer 
+                            key={i}
+                            label={el.label} 
+                            questions={el.questions}
+                            onChange={this.handleChange} />
             } else {
                 // el is a regular question
-                return <AskQuestion key={i} label={el.label} type={el.type} />
+                return <AskQuestion 
+                            key={i} 
+                            label={el.label} 
+                            type={el.type}
+                            formQuestionId={el.formQuestionId}
+                            onChange={this.handleChange}/>
             }
         })
 
