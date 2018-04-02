@@ -58,14 +58,14 @@ module.exports = {
             throw new Error("Email already exists")
         }
 
-        await db.query(`
+        let accountResp = await db.query(`
             INSERT INTO accounts (email, password)
             VALUES ('${email}', '${password}');
         `)
 
         await db.query(`
             INSERT INTO attornies (name, about, accountId)
-                VALUES ('${name}', '${about}', LAST_INSERT_ID()`)
+                VALUES ('${name}', '${about}', ${accountResp.insertId}`)
     },
 
 
