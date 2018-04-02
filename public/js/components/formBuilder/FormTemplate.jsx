@@ -19,8 +19,9 @@ export default class FormTemplate extends Component {
 			<div>
 				<FormTemplateButtons questions={this.props.questions}/>
 				<textarea
-					name="template" 
-					value={this.state.text} 
+					name="template"
+					className="template-textarea"
+					value={this.props.text} 
 					onChange={this.props.onChange}></textarea>
 			</div>
 		)

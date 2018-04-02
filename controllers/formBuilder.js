@@ -16,14 +16,14 @@ router.get('/', (req, res) => {
 
 router.post('/submitForm', async (req, res) => {
     if (req.session.isAuthenticated && req.session.isAttorney){
-        let {name, cost, state} = req.body
+        let {name, cost, state, template} = req.body
         let questions = JSON.parse(req.body.questions)
 
         let attorneyId = req.session.attorneyId
 
         cost = parseInt(cost * 100) // stripe accepts payments as integers, convert to integer here
 
-        let formId = await formModel.create(attorneyId, name, cost, state)
+        let formId = await formModel.create(attorneyId, name, cost, state, template)
 
         let rootContainerId = await formQuestionContainerModel.createRoot(formId)
         await createQuestions(formId, rootContainerId, questions)

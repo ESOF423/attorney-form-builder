@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import 'css/pure.min.css'
 import 'css/gravitons.css'
+import 'css/components/formBuilder.scss'
 
 import Question from './Question.jsx'
 import QuestionContainer from './QuestionContainer.jsx'
@@ -41,7 +42,8 @@ export default class FormBuilder extends Component {
 				name: this.state.name,
 				cost: this.state.cost,
 				state: this.state.state,
-				questions: JSON.stringify(this.state.questions)
+				questions: JSON.stringify(this.state.questions),
+				template: this.state.template
 			},
             success: (resp) => {
                 alert('success')
@@ -53,8 +55,10 @@ export default class FormBuilder extends Component {
 
 		
 		return (
-			<div>
+			<div className="form-builder-container">
 				<h1>Form Builder</h1>
+
+				<h2>General Information</h2>
 				
 				<form className="pure-form df">
 					<div className="mr1">
@@ -84,16 +88,26 @@ export default class FormBuilder extends Component {
 					</div>
 				</form>
 
-				<form className="pure-form">
+				<form className="pure-form my2">
+					<h2>Questions to be asked</h2>
+					<p>
+						Before purchasing your form, the customer will fill out these questions.
+					</p>
 					<QuestionContainer isRoot={true} questions={this.state.questions} onChange={this.onQuestionsChange}/>
+
+					<h2>Document to be displayed</h2>
+					<p>
+						This is where you enter your form legal language with the variables or containers specified above.
+					</p>
+
+					<FormTemplate value={this.state.template} onChange={this.onChange} questions={this.state.questions}/>
 				</form>
 
-				<FormTemplate value={this.state.template} onChange={this.onChange} questions={this.state.questions}/>
+				
 				
 				<div className="mt1">
 					<input type="button" className="pure-button pure-button-primary" value="Submit" onClick={this.submit}/>
 				</div>
-				{JSON.stringify(this.state.questions)}
 			</div>
 		)
 	}

@@ -92,36 +92,27 @@ export default class FormTemplate extends Component {
 		)
 
 		return (
-			<div>
-				{variables.length > 0 && (
-					<div>
-						<label>Variable</label>
-						<select id="variableSelect">{variables}</select>
-						<input
-							type="button"
-							value="Copy"
-							onClick={this.copyVariable}
-						/>
-						<span id="variableCopiedText" className="copiedText">
-							Copied to clipboard!
-						</span>
-					</div>
-				)}
+			<div className="mb2">
+				<table>
+					{variables.length > 0 &&
+					<tr>
+						<td className="pr1"><b>Variable</b></td>
+						<td className="pr1"><select id="variableSelect" className="template-selector">{variables}</select></td>
+						<td className="pr1"><input type="button" value="Copy" className="pure-button" onClick={this.copyVariable} /></td>
+						<td className="pr1"><span id="variableCopiedText" className="copiedText">Copied to clipboard!</span></td>
+					</tr>}
+					
 
-				{containers.length > 0 && (
-					<div>
-						<label>Container</label>
-						<select id="containerSelect">{containers}</select>
-						<input
-							type="button"
-							value="Copy"
-							onClick={this.copyContainer}
-						/>
-						<span id="containerCopiedText" className="copiedText">
-							Copied to clipboard!
-						</span>
-					</div>
-                )}
+					{containers.length > 0 &&
+					<tr>
+						<td className="pr1"><b>Container</b></td>
+						<td className="pr1"><select id="containerSelect" className="template-selector">{containers}</select></td>
+						<td className="pr1"><input type="button" value="Copy" className="pure-button" onClick={this.copyContainer} /></td>
+						<td className="pr1"><span id="containerCopiedText" className="copiedText">Copied to clipboard!</span></td>
+					</tr>
+					}
+					
+				</table>
 			</div>
 		)
 	}
