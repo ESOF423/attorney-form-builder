@@ -3,7 +3,7 @@ const app = require('../app');
 
 const server = 'http://server.redstonelab.net:8080'
 
-describe('Index', app.use(express.static(__dirname + '/public')){
+describe('Index', app.use(express.static(__dirname + '/public'))){
 	it('Should produce correct directory', app.use(express.static(__dirname + 'public')){
 		should.equal(app.use(), __dirname + '/public');
 	});
