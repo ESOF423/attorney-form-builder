@@ -13,23 +13,23 @@
         <input type="text" placeholder="Email" id="email">
         <input type="password" placeholder="Password" id="password">
         <input type="password" placeholder="Retype Password" id="passwordRetype">
-        <input type="submit" value="Submit">
+        <input id="submitButton" type="submit" value="Submit">
         <div id="errorText" style="color: red"></div>
         <div id="successText" style="color: green"></div>
     </form>
 
     <form id="attorneyRegisterForm" style="display:none">
-      <input type="text" placeholder="Full Name" id="fullName">
-      <input type ="text" placeholder="Business name" id="about">
+        <input type="text" placeholder="Full Name" id="fullName">
+        <input type="text" placeholder="Business name" id="about">
+	<input type="submit" id="attorneySubmitButton" value="Submit">
     </form>  
 
-    <button type="button" onclick="document.getElementById('attorneyRegisterForm').style.display='block'">Click here to register as an attorney</button>
+    <button type="button" onclick="document.getElementById('attorneyRegisterForm').style.display='block';document.getElementById('submitButton').style.display='none'">Click here to register as an attorney</button>
 
 
     <script>
-        $("#attorneyRegisterForm").submit(function(e)){
+        $(".button1").click(function(e) {
 	    e.preventDefault()
-
 	    var data = {
 	        email: $("#email").val(),
                 password: $("#password").val(),
@@ -44,13 +44,13 @@
 	    data: JSON.stringify(data),
 	    contentType: 'application/json'
 	    success: function(resp){
-                $("#successText").html("Success")
-            },
-            error: function(e){
-                $("#errorText").html(e.responseJSON.message)
-                
-	})
-      })
+                    $("#successText").html("Success")
+                },
+                error: function(e){
+                    $("#errorText").html(e.responseJSON.message)
+                }
+            })
+        })
     </script>
   
     <script>
