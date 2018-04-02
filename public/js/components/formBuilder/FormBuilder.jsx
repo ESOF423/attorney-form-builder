@@ -6,6 +6,7 @@ import 'css/gravitons.css'
 import Question from './Question.jsx'
 import QuestionContainer from './QuestionContainer.jsx'
 import StateSelect from '../shared/StateSelect.jsx'
+import FormTemplate from './FormTemplate.jsx'
 
 export default class FormBuilder extends Component {
 	constructor(props) {
@@ -85,6 +86,8 @@ export default class FormBuilder extends Component {
 				<form className="pure-form">
 					<QuestionContainer isRoot={true} questions={this.state.questions} onChange={this.onQuestionsChange}/>
 				</form>
+
+				<FormTemplate questions={this.state.questions}/>
 				
 				<div className="mt1">
 					<input type="button" className="pure-button pure-button-primary" value="Submit" onClick={this.submit}/>
