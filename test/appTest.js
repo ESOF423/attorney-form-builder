@@ -1,6 +1,3 @@
-#appTest.js
-#mostly to test that the correct directories are referenced and present
-
 const assert = require('chai').assert;
 const app = require('../app');
 
