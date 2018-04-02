@@ -16,7 +16,8 @@ export default class FormBuilder extends Component {
 			name: '',
 			cost: '',
 			state: '',
-			questions: []
+			questions: [],
+			template: ''
 		}
 	}
 
@@ -87,7 +88,7 @@ export default class FormBuilder extends Component {
 					<QuestionContainer isRoot={true} questions={this.state.questions} onChange={this.onQuestionsChange}/>
 				</form>
 
-				<FormTemplate questions={this.state.questions}/>
+				<FormTemplate value={this.state.template} onChange={this.onChange} questions={this.state.questions}/>
 				
 				<div className="mt1">
 					<input type="button" className="pure-button pure-button-primary" value="Submit" onClick={this.submit}/>
