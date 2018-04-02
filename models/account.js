@@ -21,10 +21,10 @@ module.exports = {
         }
     },
     create: async (email, password, passwordRetype) => {
-        if (pass != passRetype){
+        if (password != passwordRetype){
             throw new Error("Passwords do not match")
         }
-        pass = md5(pass)
+        password = md5(password)
 
         let emailExistsRes = await db.query(`
             SELECT *
@@ -38,15 +38,15 @@ module.exports = {
 
         await db.query(`
             INSERT INTO accounts (email, password)
-            VALUES ('${email}', '${pass}');
+            VALUES ('${email}', '${password}');
         `)
     },
 
     createAttorney: async (email, password, passwordRetype, name, about) => {
-        if (pass != passRetype){
+        if (password != passwordRetype){
             throw new Error("Passwords do not match")
         }
-        pass = md5(pass)
+        password = md5(password)
 
         let emailExistsRes = await db.query(`
             SELECT *
@@ -60,12 +60,12 @@ module.exports = {
 
         await db.query(`
             INSERT INTO accounts (email, password)
-            VALUES ('${email}', '${pass}');
+            VALUES ('${email}', '${password}');
         `)
 
-	await db.query(`
-	    INSERT INTO attornies (name, about, accountId)
-            VALUES ('${name}', '${about}', LAST_INSERT_ID())
+        await db.query(`
+            INSERT INTO attornies (name, about, accountId)
+                VALUES ('${name}', '${about}', LAST_INSERT_ID()`)
     },
 
 
