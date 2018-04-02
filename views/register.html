@@ -13,7 +13,7 @@
         <input type="text" placeholder="Email" id="email">
         <input type="password" placeholder="Password" id="password">
         <input type="password" placeholder="Retype Password" id="passwordRetype">
-        <input id="submitButton" type="submit" value="Submit">
+        <input id="submitButton" type="submit" value="Submit" class="button">
         <div id="errorText" style="color: red"></div>
         <div id="successText" style="color: green"></div>
     </form>
@@ -21,7 +21,7 @@
     <form id="attorneyRegisterForm" style="display:none">
         <input type="text" placeholder="Full Name" id="fullName">
         <input type="text" placeholder="Business name" id="about">
-	<input type="submit" id="attorneySubmitButton" value="Submit">
+	<input type="submit" id="attorneySubmitButton" value="Submit" class="button1">
     </form>  
 
     <button type="button" onclick="document.getElementById('attorneyRegisterForm').style.display='block';document.getElementById('submitButton').style.display='none'">Click here to register as an attorney</button>
@@ -42,7 +42,7 @@
 	    method: 'POST',
 	    url: '/createAttorney',
 	    data: JSON.stringify(data),
-	    contentType: 'application/json'
+	    contentType: 'application/json',
 	    success: function(resp){
                     $("#successText").html("Success")
                 },
@@ -54,7 +54,7 @@
     </script>
   
     <script>
-        $("#registerForm").submit(function(e) {
+        $(".button").click(function(e) {
             e.preventDefault()
             
             var data =  {
