@@ -4,8 +4,6 @@ import 'css/pure.min.css'
 import 'css/gravitons.css'
 import 'css/components/question.scss'
 
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
 
 export default class FormTemplate extends Component {
 	constructor(props) {
