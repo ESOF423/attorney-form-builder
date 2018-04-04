@@ -1,4 +1,4 @@
-#Testing for login
+// Testing for login
 
 const assert = require('chai').assert
 const login = require('../login');
