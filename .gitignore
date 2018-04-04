@@ -1,4 +1,5 @@
 src/config.json
+helpers/config.json
 downloads/*
 
 .DS_Store
