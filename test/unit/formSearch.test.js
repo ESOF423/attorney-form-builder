@@ -34,7 +34,7 @@ describe('formSearch test', async () => {
         await page.goto('${server}/formSearch')
         await page.type('#name', 'Will')
         await page.type('#attorney', 'invalid')
-        await page.type('4')
+        await page.type('#cost','4')
         await page.click('#formSearch input[type=submit]')
         await page.waitFor(1000)
 
@@ -47,7 +47,7 @@ describe('formSearch test', async () => {
         await page.goto('${server}/formSearch')
         await page.type('#name', 'invalid')
         await page.type('#attorney', 'Bill Waterson')
-        await page.type('4')
+        await page.type('#cost', '4')
         await page.click('#formSearch input[type=submit]')
         await page.waitFor(1000)
         
@@ -60,7 +60,7 @@ describe('formSearch test', async () => {
         await page.goto('${server}/formSearch')
         await page.type('#name', 'Will')
         await page.type('#attorney', 'Legal Beagle')
-        await page.type('invalid')
+        await page.type('#cost', 'invalid')
         await page.click('#formSearch input[type=submit]')
         await page.waitFor(1000)
 
