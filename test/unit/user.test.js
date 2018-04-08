@@ -116,7 +116,7 @@ describe('user tests', async () => {
         await page.waitFor(1000)
 
         var successText = await page.$eval("#successText", el => el.innerHTML);
-        expect(errorText).to.equal(" ")
+        expect(successText).to.equal(" ")
     }).timeout(10000);
     
     });
