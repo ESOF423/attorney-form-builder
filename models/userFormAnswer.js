@@ -10,5 +10,16 @@ module.exports = {
             INSERT INTO userFormAnswers (userFormId, formQuestionId, answer)
             VALUES ${values};
         `)
+    },
+    get: async (userFormId) => {
+        let resp = await db.query(`
+            SELECT answer, formQuestions.label as questionLabel, formQuestionContainers.formQuestionContainerId, formQuestionContainers.label as containerLabel
+            FROM userFormAnswers
+                JOIN formQuestions ON userFormAnswers.formQuestionId = formQuestions.formQuestionId
+                JOIN formQuestionContainers ON formQuestions.formQuestionContainerId = formQuestionContainers.formQuestionContainerId
+            WHERE userFormId = ${userFormId}
+        `)
+
+        return resp
     }
 }

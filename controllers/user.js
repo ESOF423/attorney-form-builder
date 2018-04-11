@@ -7,6 +7,7 @@ const auth = require('../middlewares/auth.js')
 const latexCompile = require('../helpers/latexCompile.js')
 
 const userFormModel = require('../models/userForm.js')
+const userFormAnswerModel = require('../models/userFormAnswer.js')
 const formModel = require('../models/form.js')
 
 router.use(auth.user)
@@ -32,7 +33,7 @@ router.get('/downloadForm', async (req, res) => {
     const userFormId = req.query.userFormId
     const userId = req.session.userId
     
-    const formAnswers = await userFormModel.getAnswers(userFormId)
+    const formAnswers = await userFormAnswerModel.get(userFormId)
     const form = await userFormModel.getForm(userFormId)
 
     var directory = await latexCompile.compile(form, formAnswers)
