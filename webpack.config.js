@@ -20,7 +20,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
-                options: {
+                options: { 
                     presets: ['react'],
                     plugins: ['transform-class-properties']
                 }

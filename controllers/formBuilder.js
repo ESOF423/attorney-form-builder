@@ -6,6 +6,7 @@ const auth = require('../middlewares/auth.js')
 
 const formModel = require('../models/form.js')
 const formQuestionModel = require('../models/formQuestion.js')
+const formQuestionContainerModel = require('../models/formQuestionContainer.js')
 
 router.use(auth.attorney)
 
@@ -15,14 +16,17 @@ router.get('/', (req, res) => {
 
 router.post('/submitForm', async (req, res) => {
     if (req.session.isAuthenticated && req.session.isAttorney){
-        console.log(req.body)
-        let {name, cost, state} = req.body
+        let {name, cost, state, template} = req.body
         let questions = JSON.parse(req.body.questions)
 
         let attorneyId = req.session.attorneyId
 
-        let formId = await formModel.create(attorneyId, name, cost, state)
-        await formQuestionModel.createMultiple(formId, questions)
+        cost = parseInt(cost * 100) // stripe accepts payments as integers, convert to integer here
+
+        let formId = await formModel.create(attorneyId, name, cost, state, template)
+
+        let rootContainerId = await formQuestionContainerModel.createRoot(formId)
+        await createQuestions(formId, rootContainerId, questions)
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({
@@ -30,5 +34,21 @@ router.post('/submitForm', async (req, res) => {
         }));
     }
 })
+
+async function createQuestions(formId, parentId, questions){
+    for(let i = 0; i < questions.length; i++){
+        let question = questions[i]
+
+        if (question.hasOwnProperty("questions")){
+            // question is a container question, recurse.
+            let newParentId = await formQuestionContainerModel.create(formId, parentId, question.label)
+            createQuestions(formId, newParentId, question.questions)
+        } else {
+            // question is just a regular question
+            await formQuestionModel.create(formId, parentId, question.label, 1)
+        }
+
+    }
+}
 
 module.exports = router

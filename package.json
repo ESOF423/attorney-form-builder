@@ -43,6 +43,8 @@
     "node-latex": "^2.4.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-quill": "^1.2.6",
+    "stripe": "^5.5.0",
     "sweetalert2": "^7.15.1",
     "uuid": "^3.2.1"
   }

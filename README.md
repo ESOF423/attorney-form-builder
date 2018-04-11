@@ -25,6 +25,19 @@ Run tests
 $ yarn test
 ```
 
+# Testing Framework and Execution
+
+Install [Mocha](https://semaphoreci.com/community/tutorials/getting-started-with-node-js-and-mocha)
+```
+$ npm install mocha
+$ npm install chai
+
+```
+Execute Test Files
+```
+$ npm run test
+```
+
 # Updating on server
 
 ```shell
