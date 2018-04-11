@@ -72,10 +72,13 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 success: function (resp) {
-                    $("#successText").html("Success")
-                },
-                error: function (e) {
-                    $("#errorText").html(e.responseJSON.message)
+                    if (resp.success){
+                        $("#successText").html("Success")
+                        window.location = '/login'
+                    } else {
+                        $("#errorText").html(resp.errorMessage)
+                    }
+                    
                 }
             })
         })
@@ -95,10 +98,13 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 success: function (resp) {
-                    $("#successText").html("Success")
-                },
-                error: function (e) {
-                    $("#errorText").html(e.responseJSON.message)
+                    if (resp.success){
+                        $("#successText").html("Success")
+                        window.location = '/login'
+                    } else {
+                        $("#errorText").html(resp.errorMessage)
+                    }
+                   
                 }
             })
         })

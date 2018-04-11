@@ -36,41 +36,14 @@ module.exports = {
             throw new Error("Email already exists")
         }
 
-        await db.query(`
-            INSERT INTO accounts (email, password)
-            VALUES ('${email}', '${password}');
-        `)
-    },
-
-    createAttorney: async (email, password, passwordRetype, name, about) => {
-        if (password != passwordRetype){
-            throw new Error("Passwords do not match")
-        }
-        password = md5(password)
-
-        let emailExistsRes = await db.query(`
-            SELECT *
-            FROM accounts
-            WHERE email='${email}'
-        `)
-
-        if (emailExistsRes.length > 0){
-            throw new Error("Email already exists")
-        }
-
-        let accountResp = await db.query(`
+        let resp = await db.query(`
             INSERT INTO accounts (email, password)
             VALUES ('${email}', '${password}');
         `)
 
-        await db.query(`
-            INSERT INTO attornies (name, about, accountId)
-                VALUES ('${name}', '${about}', ${accountResp.insertId}`)
+        return resp.insertId
     },
-
-
     isAttorney: async (accountId) => {
-        console.log(accountId)
         let query = await db.query(`
             SELECT *
             FROM accounts
