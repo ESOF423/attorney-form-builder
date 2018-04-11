@@ -21,10 +21,10 @@ module.exports = {
         }
     },
     create: async (email, password, passwordRetype) => {
-        if (pass != passRetype){
+        if (password != passwordRetype){
             throw new Error("Passwords do not match")
         }
-        pass = md5(pass)
+        password = md5(password)
 
         let emailExistsRes = await db.query(`
             SELECT *
@@ -36,14 +36,14 @@ module.exports = {
             throw new Error("Email already exists")
         }
 
-        await db.query(`
+        let resp = await db.query(`
             INSERT INTO accounts (email, password)
-            VALUES ('${email}', '${pass}');
+            VALUES ('${email}', '${password}');
         `)
-    },
 
+        return resp.insertId
+    },
     isAttorney: async (accountId) => {
-        console.log(accountId)
         let query = await db.query(`
             SELECT *
             FROM accounts
