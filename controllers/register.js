@@ -10,9 +10,7 @@ router.get('/', function (req, res) {
 
 router.post('/createUser', async (req, res) => {
     try {
-        var email = req.body.email
-        var password = req.body.password
-        var passwordRetype = req.body.passwordRetype
+        var {email, password, passwordRetype} = req.body
 
         await accountModel.createAccount(email, password, passwordRetype)
 
