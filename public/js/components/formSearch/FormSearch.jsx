@@ -12,9 +12,12 @@ export default class FormSearch extends Component {
 
 		this.state = {
 			forms: [],
-			name: '',
-			attorney: '',
-			cost: ''
+			filters: {
+				formName: '',
+				formCost: 0,
+				attorneyName: '',
+				state: ''
+			}
 		}
 
 		this.getForms()
@@ -43,6 +46,10 @@ export default class FormSearch extends Component {
 		}, () => {
 			this.getForms()
 		})
+	}
+
+	onFilterChange = (e) => {
+
 	}
 
 	render() {
