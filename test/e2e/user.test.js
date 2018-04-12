@@ -4,11 +4,9 @@ const { expect } = require('chai');
 
 var browser;
 var page;
-var latex;
 before(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    latex = await faker.getUserForms();
 })
 
 after(async () => {

@@ -6,9 +6,10 @@ const { expect } = require('chai')
 const server = 'http://server.redstonelab.net:8080'
 
 
+var browser;
 var page;
 before(async () => {
-    const browser = await puppeteer.launch({args: ['--no-sandbox']});
+    browser = await puppeteer.launch();
     page = await browser.newPage();
 })
 
@@ -18,7 +19,7 @@ after(async () => {
 
 describe('formSearch test', async () => {
     it('should find', async () => {
-        await page.goto('${server}/formSearch')
+        await page.goto(`${server}/formSearch`)
         await page.type('#name','Will')
         await page.type('#attorney','Bill Waterson')
         await page.type('#cost', '4')
@@ -31,7 +32,7 @@ describe('formSearch test', async () => {
     }).timeout(10000);
 
     it('should not find', async () => {
-        await page.goto('${server}/formSearch')
+        await page.goto(`${server}/formSearch`)
         await page.type('#name', 'Will')
         await page.type('#attorney', 'invalid')
         await page.type('#cost','4')
@@ -44,7 +45,7 @@ describe('formSearch test', async () => {
     }).timeout(10000);
 
     it('should not find', async () => {
-        await page.goto('${server}/formSearch')
+        await page.goto(`${server}/formSearch`)
         await page.type('#name', 'invalid')
         await page.type('#attorney', 'Bill Waterson')
         await page.type('#cost', '4')
@@ -57,7 +58,7 @@ describe('formSearch test', async () => {
     }).timeout(10000);
 
     it('should not find', async () => {
-        await page.goto('${server}/formSearch')
+        await page.goto(`${server}/formSearch`)
         await page.type('#name', 'Will')
         await page.type('#attorney', 'Bill Waterson')
         await page.type('#cost', 'invalid')
