@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev": "webpack --mode development --watch",
     "test": "mocha --recursive",
     "test:e2e": "mocha test/e2e",
+    "test:unit": "nyc mocha test/unit",
     "serve": "node app.js"
   },
   "repository": "git+https://github.com/ESOF423/attorney-form-builder.git",
