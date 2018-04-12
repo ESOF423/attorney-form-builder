@@ -1,4 +1,4 @@
-/*
+
 const puppeteer = require('puppeteer')
 const faker = require('faker')
 const { expect } = require('chai')
@@ -62,4 +62,3 @@ describe('Purchase form test', async() => {
         expect(errorText).to.equal("Invalid formName")
     }).timeout(10000);
 })
-*/

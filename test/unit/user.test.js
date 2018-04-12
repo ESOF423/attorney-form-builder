@@ -1,4 +1,4 @@
-/*
+
 const puppeteer = require('puppeteer');
 const faker = require('faker');
 const { expect } = require('chai');
@@ -118,4 +118,3 @@ describe('user tests', async () => {
     }).timeout(10000);
     
     });
-    
