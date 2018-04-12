@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const faker = require('faker');
 const { expect } = require('chai');
 
-var browser;
+const browser;
 var page;
 before(async () => {
     browser = await puppeteer.launch({args: ['--no-sandbox']});
