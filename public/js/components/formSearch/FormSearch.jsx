@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 
+import StateSelect from '../shared/StateSelect.jsx'
+
 import 'css/pure.min.css'
+import 'css/gravitons.css'
+import 'css/components/question.scss'
 
 export default class FormSearch extends Component {
 	constructor(props) {
@@ -25,7 +29,6 @@ export default class FormSearch extends Component {
 				cost: this.state.cost
 			},
 			success: (resp) => {
-				console.log(resp)
 				this.setState({
 					forms: resp.forms
 				})
@@ -59,6 +62,42 @@ export default class FormSearch extends Component {
 		return (
 			<div>
 				<h1>Search for Forms</h1>
+
+				<div className="df pure-form">
+					<div>
+						<label>Form Name</label>
+						<input type="text" 
+							placeholder="Form Name" 
+							value={this.filters.formName} 
+							name="formName"
+							onChange={this.onFilterChange}/>
+					</div>
+					<div>
+						<label>Form Cost</label>
+						<input type="number" 
+							placeholder="Form Cost"
+							value={this.filters.formCost}
+							name="formCost"
+							onChange={this.onFilterChange}/>
+					</div>
+					<div>
+						<label>Attorney Name</label>
+						<input type="text" 
+							placeholder="Attorney Name"
+							value={this.filters.attorneyName}
+							name="attorneyName"
+							onChange={this.onFilterChange}/>
+					</div>
+					<div>
+						<label>State</label>
+						<StateSelect 
+							allStatesOption={true}
+							value={this.filters.state}
+							name="state"
+							onChange={this.onFilterChange}/>
+					</div>
+				</div>
+
 				<table className="pure-table">
 					<thead>
 						<tr>
