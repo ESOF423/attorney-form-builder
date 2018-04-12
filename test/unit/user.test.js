@@ -31,7 +31,7 @@ describe('user tests', async () => {
     }).timeout(10000);
 
     it('should not login', async () => {
-        await page.goto('${server}/login')
+        await page.goto(`${server}/login`)
         await page.type('#email', faker.internet.email())
         await page.type('#password', faker.internet.password())
         await page.click('#login input[type=submit]')
@@ -44,7 +44,7 @@ describe('user tests', async () => {
     }).timeout(10000);
 
     it('should purchase form', async () => {
-        await page.goto('${server}/purchaseForm')
+        await page.goto(`${server}/purchaseForm`)
         await page.type('#getUserFormAnswers', faker.getUserFormAnswers())
         await page.type('#getForm', faker.getForm())
         await page.click('#createUserForm input[type=submit]')
@@ -57,7 +57,7 @@ describe('user tests', async () => {
     }).timeout(10000);
 
     it('should not purchase form', async () => {
-        await page.goto('${server}/purchaseForm')
+        await page.goto(`${server}/purchaseForm`)
         await page.type('#getUserFormAnswers', faker.getUserFormAnswers())
         await page.type('#getForm', faker.getForm())
         await page.click('#createUserForm input[type=submit]')
@@ -70,7 +70,7 @@ describe('user tests', async () => {
     }).timeout(10000);
     
     it('should get form', async () => {
-        await page.goto('${server}/getForms')
+        await page.goto(`${server}/getForms`)
         await page.type('#userFormId', faker.userFormId())
         await page.click('#getUserForms input[type=submit]')
 
@@ -82,7 +82,7 @@ describe('user tests', async () => {
     }).timeout(10000);
     
     it('should not get form', async () => {
-        await page.goto('${server}/getForms')
+        await page.goto(`${server}/getForms`)
         await page.type('#userFormId',faker.userFormId())
         await page.click('#getUserForms input[type=submit]')
 
@@ -94,7 +94,7 @@ describe('user tests', async () => {
     }).timeout(10000);
     
     it('should download form', async () => {
-        await page.goto('${server}/dowloadForm')
+        await page.goto(`${server}/dowloadForm`)
         await page.type('#userId', faker.userId())
         await page.type('#userFormId', faker.userFormId())
         await page.click('#downloadForm, input[type=submit]')
@@ -106,7 +106,7 @@ describe('user tests', async () => {
     }).timeout(10000);
 
     it('should not download form', async () => {
-        await page.got('${server}/downloadForm')
+        await page.goto(`${server}/downloadForm`)
         await page.type('#userId', faker.userId())
         await page.type('#userFormId', faker.userFormId())
         await page.click('#downloadForm, input[type=submit]')
