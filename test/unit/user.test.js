@@ -1,15 +1,12 @@
 const puppeteer = require('puppeteer');
 const faker = require('faker');
-const papel = require('papel');
 const { expect } = require('chai');
 
 var browser;
 var page;
-var latex;
 before(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    latex = await papel.getUserForms();
 })
 
 after(async () => {
@@ -35,7 +32,7 @@ describe('user tests', async () => {
     it('should not login', async () => {
         await page.goto('${server}/login')
         await page.type('#email', faker.internet.email())
-        await page.type('#password', faker.internet.password()
+        await page.type('#password', faker.internet.password())
         await page.click('#login input[type=submit]')
         
         await page.waitFor(1000)
@@ -71,7 +68,7 @@ describe('user tests', async () => {
         expect(successText).to.equal(" ")
     }).timeout(10000);
     
-    it('should get form', async () => 
+    it('should get form', async () => {
         await page.goto('${server}/getForms')
         await page.type('#userFormId', faker.userFormId())
         await page.click('#getUserForms input[type=submit]')
