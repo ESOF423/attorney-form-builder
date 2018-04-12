@@ -45,7 +45,7 @@ module.exports = {
         }
 
         let q = `
-            SELECT formId, forms.name as formName, forms.cost, attornies.name as attorneyName
+            SELECT formId, forms.name as formName, forms.cost, attornies.name as attorneyName, forms.state
             FROM forms 
             JOIN attornies ON forms.attorneyId = attornies.attorneyId
 
@@ -56,8 +56,6 @@ module.exports = {
                 (forms.state = "${state}" OR '${state}' = '')
 
         `
-
-        console.log(q)
 
         let forms = await db.query(q)
 

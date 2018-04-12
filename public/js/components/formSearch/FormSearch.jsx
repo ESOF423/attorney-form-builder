@@ -55,6 +55,7 @@ export default class FormSearch extends Component {
 					<td>{form.formName}</td>
 					<td>{form.cost}</td>
 					<td>{form.attorneyName}</td>
+					<td>{form.state}</td>
 					<td>
 						<a href={`/purchaseForm?formId=${form.formId}`}>Purchase</a>
 					</td>
@@ -107,6 +108,7 @@ export default class FormSearch extends Component {
 							<th>Name</th>
 							<th>Cost</th>
 							<th>Attorney</th>
+							<th>State</th>
 							<th>Purchase</th>
 						</tr>
 					</thead>
