@@ -6,10 +6,10 @@ const { expect } = require('chai')
 //server address
 const server = 'http://server.redstonelab.net:8080'
 
-const browser;
+
 var page;
 before(async () => {
-      browser = await puppeteer.launch({args: ['--no-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox']});
     page = await browser.newPage();
 })
 
