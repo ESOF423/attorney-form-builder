@@ -37,14 +37,29 @@ module.exports = {
 
         return questions
     },
-    search: async (formName, attorneyName, cost) => {
-        attorneyName = !!attorneyName ? `%${attorneyName}%` : ''
+    search: async (formName, attorneyName, formCost, state) => {
 
-        let forms = await db.query(`
+        formCost = parseFloat(formCost) * 100
+        if (isNaN(formCost)){
+            formCost = ''
+        }
+
+        let q = `
             SELECT formId, forms.name as formName, forms.cost, attornies.name as attorneyName
             FROM forms 
             JOIN attornies ON forms.attorneyId = attornies.attorneyId
-        `)
+
+            WHERE 
+                (forms.name LIKE "%${formName}%" OR '${formName}' = '') AND
+                (attornies.name LIKE "%${attorneyName}%" OR  '${attorneyName}' = '') AND
+                (forms.cost = "${formCost}" OR '${formCost}' = '') AND
+                (forms.state = "${state}" OR '${state}' = '')
+
+        `
+
+        console.log(q)
+
+        let forms = await db.query(q)
 
         return forms
     }

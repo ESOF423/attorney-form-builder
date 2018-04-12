@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../views', 'formSearch.html'))
 })
 
-router.get('/getForms', async (req, res) => {
+router.post('/getForms', async (req, res) => {
     try {
         const {formName, formCost, attorneyName, state} = req.body
 

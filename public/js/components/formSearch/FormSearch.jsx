@@ -24,9 +24,11 @@ export default class FormSearch extends Component {
 	}
 
 	getForms = () => {
+		console.log(JSON.stringify(this.state.filters))
 		$.ajax({
 			url: 'formSearch/getForms',
-			data: JSON.stringify(this.state.filters),
+			data: this.state.filters,
+			method: 'post',
 			success: (resp) => {
 				this.setState({
 					forms: resp.forms
