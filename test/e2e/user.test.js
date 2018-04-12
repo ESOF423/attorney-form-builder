@@ -22,7 +22,7 @@ describe('user tests', async () => {
 
         await page.goto(`${server}/login`)
         await page.type('#email', faker.internet.email())
-        await page.type('#password', pass)
+        await page.type('#password', password)
 
         await page.click('#login input[type=submit]')
         await page.waitFor(1000)
@@ -35,7 +35,7 @@ describe('user tests', async () => {
     it('should not login', async () => {
         await page.goto('${server}/login')
         await page.type('#email', faker.internet.email())
-        await page.type('#password', faker.internet.password()
+        await page.type('#password', faker.internet.password())
         await page.click('#login input[type=submit]')
         
         await page.waitFor(1000)
