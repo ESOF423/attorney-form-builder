@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    //"coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev": "webpack --mode development --watch",
     "test": "mocha --recursive",
     "test:e2e": "mocha test/e2e",
-    "test:unit": "nyc mocha test/unit",
+    //"test:unit": "nyc mocha test/unit",
     "serve": "node app.js"
   },
   "repository": "git+https://github.com/ESOF423/attorney-form-builder.git",
@@ -29,7 +29,7 @@
     "faker": "^4.1.0",
     "mocha": "^5.0.0",
     "node-sass": "^4.7.2",
-    "nyc": "^11.6.0",
+    //"nyc": "^11.6.0",
     "puppeteer": "^1.0.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
