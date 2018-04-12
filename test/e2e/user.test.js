@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
 const faker = require('faker');
-const papel = require('papel');
 const { expect } = require('chai');
 
 var browser;
@@ -9,7 +8,7 @@ var latex;
 before(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    latex = await papel.getUserForms();
+    latex = await faker.getUserForms();
 })
 
 after(async () => {
