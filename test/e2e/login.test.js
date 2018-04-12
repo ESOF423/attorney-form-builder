@@ -8,7 +8,7 @@ const server = 'http://server.redstonelab.net:8080'
 var browser;
 var page;
 before(async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({args: [`--no-sandbox`]});
     page = await browser.newPage();
 })
 
