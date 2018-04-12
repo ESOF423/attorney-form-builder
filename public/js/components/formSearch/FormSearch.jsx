@@ -14,7 +14,7 @@ export default class FormSearch extends Component {
 			forms: [],
 			filters: {
 				formName: '',
-				formCost: 0,
+				formCost: undefined,
 				attorneyName: '',
 				state: ''
 			}
@@ -26,11 +26,7 @@ export default class FormSearch extends Component {
 	getForms = () => {
 		$.ajax({
 			url: 'formSearch/getForms',
-			data: {
-				name: this.state.name,
-				attorney: this.state.attorney,
-				cost: this.state.cost
-			},
+			data: JSON.stringify(this.state.filters),
 			success: (resp) => {
 				this.setState({
 					forms: resp.forms
@@ -42,14 +38,12 @@ export default class FormSearch extends Component {
 	handleFilterChange = (e) => {
 		const target = e.target
 		this.setState({
-			[target.name]: target.value
+			filters: Object.assign(this.state.filters, {
+				[target.name]: target.value
+			})
 		}, () => {
 			this.getForms()
 		})
-	}
-
-	onFilterChange = (e) => {
-
 	}
 
 	render() {
@@ -75,33 +69,33 @@ export default class FormSearch extends Component {
 						<label>Form Name</label>
 						<input type="text" 
 							placeholder="Form Name" 
-							value={this.filters.formName} 
+							value={this.state.filters.formName} 
 							name="formName"
-							onChange={this.onFilterChange}/>
+							onChange={this.handleFilterChange}/>
 					</div>
 					<div>
 						<label>Form Cost</label>
 						<input type="number" 
 							placeholder="Form Cost"
-							value={this.filters.formCost}
+							value={this.state.filters.formCost}
 							name="formCost"
-							onChange={this.onFilterChange}/>
+							onChange={this.handleFilterChange}/>
 					</div>
 					<div>
 						<label>Attorney Name</label>
 						<input type="text" 
 							placeholder="Attorney Name"
-							value={this.filters.attorneyName}
+							value={this.state.filters.attorneyName}
 							name="attorneyName"
-							onChange={this.onFilterChange}/>
+							onChange={this.handleFilterChange}/>
 					</div>
 					<div>
 						<label>State</label>
 						<StateSelect 
 							allStatesOption={true}
-							value={this.filters.state}
+							value={this.state.filters.state}
 							name="state"
-							onChange={this.onFilterChange}/>
+							onChange={this.handleFilterChange}/>
 					</div>
 				</div>
 
