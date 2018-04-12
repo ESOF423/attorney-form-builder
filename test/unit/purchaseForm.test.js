@@ -20,7 +20,7 @@ after(async () => {
 
 describe('Purchase form test', async() => {
     it('should purchase', async() => {
-        await page.goto('${server}/purchaseForm')
+        await page.goto(`${server}/purchaseForm`)
         await page.type('#formName','Will')
         await page.type('#formId', '5')
         await page.type('#userId','1')
@@ -31,7 +31,7 @@ describe('Purchase form test', async() => {
     }).timeout(10000);
 
     it('should not purchase', async() => {
-        await page.goto('${server}/purchaseForm')
+        await page.goto(`${server}/purchaseForm`)
         await page.type('#formName', 'Will')
         await page.type('#formId', 'invalid')
         await page.type('#userId', '1')
@@ -42,7 +42,7 @@ describe('Purchase form test', async() => {
     }).timeout(10000);
 
     it('should not purchase', async() => {
-        await page.goto('${server}/purchaseForm')
+        await page.goto(`${server}/purchaseForm`)
         await page.type('#formName', 'Will')
         await page.type('#formId', '5')
         await page.type('#userId', 'invalid')
@@ -53,7 +53,7 @@ describe('Purchase form test', async() => {
     }).timeout(10000);
 
     it('should not purchase', async() => {
-        await page.goto('${server}/purchaseForm')
+        await page.goto(`${server}/purchaseForm`)
         await page.type('#formName', 'invalid')
         await page.type('#formId', '5')
         await page.type('#userId', '1')
