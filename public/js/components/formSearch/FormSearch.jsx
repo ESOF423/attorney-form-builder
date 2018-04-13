@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import StateSelect from '../shared/StateSelect.jsx'
 
+import 'css/general.css'
 import 'css/pure.min.css'
 import 'css/gravitons.css'
 import 'css/components/question.scss'
@@ -24,7 +25,6 @@ export default class FormSearch extends Component {
 	}
 
 	getForms = () => {
-		console.log(JSON.stringify(this.state.filters))
 		$.ajax({
 			url: 'formSearch/getForms',
 			data: this.state.filters,
@@ -53,7 +53,7 @@ export default class FormSearch extends Component {
 			return (
 				<tr key={i}>
 					<td>{form.formName}</td>
-					<td>{form.cost}</td>
+					<td>${parseFloat(form.cost)/100}</td>
 					<td>{form.attorneyName}</td>
 					<td>{form.state}</td>
 					<td>
@@ -64,10 +64,10 @@ export default class FormSearch extends Component {
 		})
 
 		return (
-			<div>
+			<div className="container">
 				<h1>Search for Forms</h1>
 
-				<div className="df pure-form">
+				<div className="df fsa pure-form">
 					<div>
 						<label>Form Name</label>
 						<input type="text" 
@@ -102,7 +102,7 @@ export default class FormSearch extends Component {
 					</div>
 				</div>
 
-				<table className="pure-table">
+				<table className="pure-table ma mt3">
 					<thead>
 						<tr>
 							<th>Name</th>
