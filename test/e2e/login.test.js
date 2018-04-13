@@ -5,6 +5,9 @@ const { expect } = require('chai');
 //const server = 'http://localhost:8080';
 const server = 'http://server.redstonelab.net:8080'
 
+var email = 'user@test.com';
+var pass = 'password';
+
 var browser;
 var page;
 before(async () => {
@@ -26,7 +29,7 @@ describe('login test', async () => {
     
     var successText = await page.$eval("#successText", el => el.innerHTML);
 
-    expect(successText).to.equal("Success")
+    expect(successText).to.equal('')
   }).timeout(10000);
 
   it('shouldn\'t login', async () => {
