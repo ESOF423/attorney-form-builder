@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 
+import StateSelect from '../shared/StateSelect.jsx'
+
+import 'css/general.css'
 import 'css/pure.min.css'
+import 'css/gravitons.css'
+import 'css/components/question.scss'
 
 export default class FormSearch extends Component {
 	constructor(props) {
@@ -8,9 +13,12 @@ export default class FormSearch extends Component {
 
 		this.state = {
 			forms: [],
-			name: '',
-			attorney: '',
-			cost: ''
+			filters: {
+				formName: '',
+				formCost: undefined,
+				attorneyName: '',
+				state: ''
+			}
 		}
 
 		this.getForms()
@@ -19,13 +27,9 @@ export default class FormSearch extends Component {
 	getForms = () => {
 		$.ajax({
 			url: 'formSearch/getForms',
-			data: {
-				name: this.state.name,
-				attorney: this.state.attorney,
-				cost: this.state.cost
-			},
+			data: this.state.filters,
+			method: 'post',
 			success: (resp) => {
-				console.log(resp)
 				this.setState({
 					forms: resp.forms
 				})
@@ -36,7 +40,9 @@ export default class FormSearch extends Component {
 	handleFilterChange = (e) => {
 		const target = e.target
 		this.setState({
-			[target.name]: target.value
+			filters: Object.assign(this.state.filters, {
+				[target.name]: target.value
+			})
 		}, () => {
 			this.getForms()
 		})
@@ -47,8 +53,9 @@ export default class FormSearch extends Component {
 			return (
 				<tr key={i}>
 					<td>{form.formName}</td>
-					<td>{form.cost}</td>
+					<td>${parseFloat(form.cost)/100}</td>
 					<td>{form.attorneyName}</td>
+					<td>{form.state}</td>
 					<td>
 						<a href={`/purchaseForm?formId=${form.formId}`}>Purchase</a>
 					</td>
@@ -57,14 +64,51 @@ export default class FormSearch extends Component {
 		})
 
 		return (
-			<div>
+			<div className="container">
 				<h1>Search for Forms</h1>
-				<table className="pure-table">
+
+				<div className="df fsa pure-form">
+					<div>
+						<label>Form Name</label>
+						<input type="text" 
+							placeholder="Form Name" 
+							value={this.state.filters.formName} 
+							name="formName"
+							onChange={this.handleFilterChange}/>
+					</div>
+					<div>
+						<label>Form Cost</label>
+						<input type="number" 
+							placeholder="Form Cost"
+							value={this.state.filters.formCost}
+							name="formCost"
+							onChange={this.handleFilterChange}/>
+					</div>
+					<div>
+						<label>Attorney Name</label>
+						<input type="text" 
+							placeholder="Attorney Name"
+							value={this.state.filters.attorneyName}
+							name="attorneyName"
+							onChange={this.handleFilterChange}/>
+					</div>
+					<div>
+						<label>State</label>
+						<StateSelect 
+							allStatesOption={true}
+							value={this.state.filters.state}
+							name="state"
+							onChange={this.handleFilterChange}/>
+					</div>
+				</div>
+
+				<table className="pure-table ma mt3">
 					<thead>
 						<tr>
 							<th>Name</th>
 							<th>Cost</th>
 							<th>Attorney</th>
+							<th>State</th>
 							<th>Purchase</th>
 						</tr>
 					</thead>

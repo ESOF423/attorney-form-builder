@@ -16,6 +16,9 @@ export default class SelectState extends Component {
 
         return (
             <select name={this.props.name} value={this.props.value} onChange={this.props.onChange}>
+                {this.props.allStatesOption &&
+                    <option>All States</option>
+                }
                 {states}
             </select>
         );
