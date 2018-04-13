@@ -91,13 +91,13 @@ export default class FormBuilder extends Component {
 				<form className="pure-form my2">
 					<h2>Questions to be asked</h2>
 					<p>
-						Before purchasing your form, the customer will fill out these questions.
+						Before purchasing your form, the customer will fill out these questions A container is a question and, if marked as true, will allow for a secondary question to be asked. Such as "Do you have any pets?" Which if checked yes would then ask any following questions nested inside of the container.
 					</p>
 					<QuestionContainer isRoot={true} questions={this.state.questions} onChange={this.onQuestionsChange}/>
 
 					<h2>Document to be displayed</h2>
 					<p>
-						This is where you enter your form legal language with the variables or containers specified above.
+						This is where you enter your form legal language with the variables or containers specified above. Select a variable and click "Copy" to put it into your clipboard, and then paste it in the box below where you would like it to appear on the form. For containers, paste in their respective questions inside of the brackets.
 					</p>
 
 					<FormTemplate value={this.state.template} onChange={this.onChange} questions={this.state.questions}/>
