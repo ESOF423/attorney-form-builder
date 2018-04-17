@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 const auth = require('../middlewares/auth.js')
+const latexCompile = require('../helpers/latexCompile.js')
 
 const formModel = require('../models/form.js')
 
@@ -21,6 +22,15 @@ router.get('/getForms', async (req, res) => {
             forms: forms
         }));
     }
+})
+
+router.get('/downloadForm', async (req, res) => {
+    const formId = req.query.formId
+
+    let form = await formModel.get(formId)
+
+    var directory = await latexCompile.compile(form)
+    res.download(directory + "/src.pdf", `${form.name}.pdf`)
 })
 
 router.get('/signout', async (req, res) => {

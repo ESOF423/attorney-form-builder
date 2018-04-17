@@ -20,7 +20,7 @@ module.exports = {
     },
     getByAttorney: async (attorneyId) => {
         let forms = await db.query(`
-            SELECT name as formName, cost
+            SELECT name as formName, cost, formId
             FROM forms
             WHERE attorneyId = ${attorneyId}
         `)
