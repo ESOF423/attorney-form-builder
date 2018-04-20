@@ -16,8 +16,20 @@ after(async () => {
 })
 
 describe('user test', async () => {
-  
-  it('shouldn not login', async () => {
+  it('should login user', async () => {
+    await page.goto(`${server}/login`)
+    await page.type('#email', 'test@test.com')
+    await page.type('#password','password')
+    await page.click('#loginForm input[type=submit]')
+
+    await page.waitFor(1000)
+
+    var successText = await page.$eval("#successText", el => el.innerHTML);
+    expect(successText).to.equal('')
+
+    }).timeout(10000);
+
+  it('shouldn not login user', async () => {
     await page.goto(`${server}/login`)
     await page.type('#email', 'fake@test.com')
     await page.type('#password', 'password')

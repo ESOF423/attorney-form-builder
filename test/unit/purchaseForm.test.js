@@ -26,6 +26,16 @@ after(async () => {
 })
 
 describe('Purchase form test', async() => {
+  it('should purchase', async() => {
+    await login()
+    await page.goto(`${server}/purchaseForm?formId=7`)
+    await page.waitFor(1000)
+
+    var successText = await page.$eval("#successText", el => el.innerHTML);
+    expect(successText).to.equal('')
+
+  }).timeout(10000);
+
     it('should not purchase', async() => {
         await page.goto(`${server}/purchaseForm`)
         await login()
