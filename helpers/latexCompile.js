@@ -8,14 +8,12 @@ const { exec } = require('child_process');
 
 var compile = (form, formAnswers) => {
     return new Promise((resolve, reject) => {
-        console.log(formAnswers)
         let input = ""
         if (formAnswers){
             // replaces all the varaibels with their 
             input = formAnswers.reduce((accumulator, formAnswer) => {
                 return accumulator.replace(new RegExp(`\\{${formAnswer.questionLabel}\\}`, 'gm'), formAnswer.answer)
             }, form.template)
-            console.log("1: " + input)
 
             // get a list of all the used containers (ignoring root container)
             var containersUsed = formAnswers.filter(el => {
@@ -26,11 +24,9 @@ var compile = (form, formAnswers) => {
             containersUsed.forEach(el => {
                 input = input.replace(new RegExp(`(\\[${el.containerLabel})((\\r\\n|\\r|\\n|.)*?)(\\])`, 'gm'), '$2')
             })
-            console.log("2: " + input)
 
             // remove any un-used containers from input
             input = input.replace(new RegExp(`\\[((\\r\\n|\\r|\\n|.)*?)\\]`, 'gm'), '')
-            console.log("3: " + input)
         } else {
             input = form.template
         }

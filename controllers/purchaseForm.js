@@ -48,7 +48,6 @@ router.post('/purchaseForm', async (req, res) => {
     let form = await formModel.get(formId)
 
     if (isAttorney == 'true'){
-        console.log(answers)
         var directory = await latexCompile.compile(form, answers)
         res.download(directory + "/src.pdf", `${form.name}.pdf`)
     } else {

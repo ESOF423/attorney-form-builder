@@ -28,7 +28,7 @@ export default class Attorney extends Component {
             return (
                 <tr key={i}>
                     <td>{formData.formName}</td>
-                    <td>{formData.cost}</td>
+                    <td>{parseFloat(formData.cost)/100}</td>
                     <td><a href={'/purchaseForm?attorney=true&formId='+formData.formId}>Download</a></td>
                 </tr>
             )
