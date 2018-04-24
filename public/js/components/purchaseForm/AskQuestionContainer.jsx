@@ -35,7 +35,8 @@ export default class AskQuestionContainer extends Component {
                         key={i} 
                         label={el.label} 
                         type={el.type} 
-                        formQuestionId={el.formQuestionId} 
+                        formQuestionId={el.formQuestionId}
+                        containerLabel={this.props.label}
                         onChange={this.props.onChange}/>
                 }
             })

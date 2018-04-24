@@ -22,11 +22,6 @@ export default class Attorney extends Component {
         })
     }
 
-    attorneyDownloadForm = (formId) => {
-
-    }
-
-
     render() {
 
         const attorneyForms = this.state.forms.map((formData, i) => {
@@ -34,7 +29,7 @@ export default class Attorney extends Component {
                 <tr key={i}>
                     <td>{formData.formName}</td>
                     <td>{formData.cost}</td>
-                    <td><a href={'/attorney/downloadForm?formId='+formData.formId}>Download</a></td>
+                    <td><a href={'/purchaseForm?attorney=true&formId='+formData.formId}>Download</a></td>
                 </tr>
             )
         })

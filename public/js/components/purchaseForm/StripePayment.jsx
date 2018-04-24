@@ -73,6 +73,7 @@ export default class StripePayment extends Component {
                         <div id="card-element"></div>
                         <div id="card-errors" role="alert"></div>
                     </div>
+                    
                     <input type="button" className="pure-button pure-button-primary" value="Purchase Form" onClick={this.createToken} />
                 </form>
             </div>
