@@ -19,7 +19,8 @@ export default class PurchaseForm extends Component {
 
         let urlParts = document.URL.extract()
         this.formId = urlParts ? urlParts.formId : null
-
+        this.isAttorney = (urlParts && urlParts.attorney) ? urlParts.attorney == "true" : false
+        
         this.getFormData()
     }
 
@@ -30,7 +31,6 @@ export default class PurchaseForm extends Component {
                 formId: this.formId
             },
             success: (resp) => {
-                debugger
                 this.setState({
                     questions: resp.questions,
                     formName: resp.formName,
@@ -60,23 +60,36 @@ export default class PurchaseForm extends Component {
             }
         })
 
-        $.ajax({
-            url: '/purchaseForm/purchaseForm',
-            method: 'post',
-            data: {
-                answers: JSON.stringify(transformedAnswers),
-                formId: this.formId,
-                stripeToken: stripeToken
-            },
-            success: () => {
-                window.location = '/user'
-            }
-        })
+        if (this.isAttorney) {
+            $("#attorneySubmitForm").submit()
+        } else {
+            $.ajax({
+                url: '/purchaseForm/purchaseForm',
+                method: 'post',
+                data: {
+                    answers: JSON.stringify(transformedAnswers),
+                    formId: this.formId,
+                    stripeToken: stripeToken
+                },
+                success: (er) => {
+                    window.location = '/user'
+                }
+            })
+        }
+        
     }
 
     handleChange = (e) => {
         let newAnswers = this.state.answers
-        newAnswers[e.formQuestionId] = e.answer
+        
+        if (this.isAttorney){
+            newAnswers[e.label] = {
+                answer: e.answer,
+                containerLabel: e.containerLabel
+            }
+        } else {
+            newAnswers[e.formQuestionId] = e.answer
+        }
 
         this.setState({
             answers: newAnswers
@@ -111,8 +124,29 @@ export default class PurchaseForm extends Component {
                 <h2>This form costs: ${this.state.formCost}</h2>
                 <div className="pure-form">
                     {questionsDom}
-                    <StripePayment onSubmit={this.purchaseForm}/>
+                    {this.isAttorney}
+                    {
+                        !this.isAttorney &&
+                        <StripePayment onSubmit={this.purchaseForm} isAttorney={this.isAttorney}/>
+                    } 
                 </div>
+                
+
+            {
+                this.isAttorney &&
+                <form id="attorneySubmitForm" action="/purchaseForm/purchaseForm" method="POST">
+                    <input type="submit" className="pure-button" value="Download Form"/>
+                    <input type="hidden" name="formId" value={this.formId}/>
+                    <input type="hidden" name="answers" value={JSON.stringify(Object.keys(this.state.answers).map(key => {
+                        return {
+                            answer: this.state.answers[key].answer,
+                            questionLabel: key,
+                            containerLabel: this.state.answers[key].containerLabel
+                        }
+                    }))}/>
+                    <input type="hidden" name="isAttorney" value="true"/>
+                </form>
+            }
             </div>
         )
     }

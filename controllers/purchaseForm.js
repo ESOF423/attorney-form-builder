@@ -11,6 +11,8 @@ const userFormModel = require('../models/userForm.js')
 const userFormAnswerModel = require('../models/userFormAnswer.js')
 const paymentModel = require('../models/payment.js')
 
+const latexCompile = require('../helpers/latexCompile.js')
+
 router.use(auth.user)
 
 router.get('/', function(req, res) {
@@ -38,21 +40,27 @@ router.get('/getFormData', async (req, res) => {
 router.post('/purchaseForm', async (req, res) => {
     let formId = req.body.formId
     let stripeTokenObj = req.body.stripeToken
+    let isAttorney = req.body.isAttorney
     let answers = JSON.parse(req.body.answers)
     let userId = req.session.userId
 
     // retreive the form from the db, so users cant modify the cost of the form upon submission
     let form = await formModel.get(formId)
 
-    await paymentModel.makePayment(form.cost, stripeTokenObj.id, `Charge for formId: ${formId}(${form.name}), on userId: ${userId}`)
+    if (isAttorney == 'true'){
+        var directory = await latexCompile.compile(form, answers)
+        res.download(directory + "/src.pdf", `${form.name}.pdf`)
+    } else {
+        await paymentModel.makePayment(form.cost, stripeTokenObj.id, `Charge for formId: ${formId}(${form.name}), on userId: ${userId}`)
 
-    let userFormId = await userFormModel.create(userId, formId)
-    await userFormAnswerModel.createMultiple(userFormId, answers)
-
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({
-        success: true
-    }));
+        let userFormId = await userFormModel.create(userId, formId)
+        await userFormAnswerModel.createMultiple(userFormId, answers)
+    
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({
+            success: true
+        }));
+    }
 })
 
 function generateQuestionJson(containers, questions) {

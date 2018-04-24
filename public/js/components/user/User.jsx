@@ -31,7 +31,7 @@ export default class User extends Component {
             return (
                 <tr key={i}>
                     <td>{formData.formName}</td>
-                    <td>{formData.cost}</td>
+                    <td>{parseFloat(formData.cost)/100}</td>
                     <td>{moment(formData.purchased).format('M/DD/YYYY')}</td>
                     <td><a href={'/user/downloadForm?userFormId='+formData.userFormId}>Download</a></td>
                 </tr>

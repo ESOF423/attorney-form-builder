@@ -8,7 +8,9 @@ export default class AskQuestion extends Component {
     onChange = (e) => {
         this.props.onChange({
             answer: e.target.value,
-            formQuestionId: this.props.formQuestionId
+            formQuestionId: this.props.formQuestionId,
+            label: this.props.label,
+            containerLabel: this.props.containerLabel
         })
     }
 
