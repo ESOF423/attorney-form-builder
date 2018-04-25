@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 import moment from 'moment'
 
-import '../../../css/pure.min.css'
+import 'css/pure.min.css'
+import 'css/general.css'
 
 export default class User extends Component {
     constructor(props) {
@@ -31,14 +32,14 @@ export default class User extends Component {
             return (
                 <tr key={i}>
                     <td>{formData.formName}</td>
-                    <td>{formData.cost}</td>
+                    <td>{parseFloat(formData.cost)/100}</td>
                     <td>{moment(formData.purchased).format('M/DD/YYYY')}</td>
                     <td><a href={'/user/downloadForm?userFormId='+formData.userFormId}>Download</a></td>
                 </tr>
             )
         })
         return (
-            <div>
+            <div className="container">
                 <h1>User Page</h1>
                 <table className="pure-table">
                     <thead>

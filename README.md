@@ -7,3 +7,37 @@ This application serves to take data from a webform and convert it to a legal do
 
 # Documentation
 Please refer to our [wiki](https://github.com/ESOF423/attorney-form-builder/wiki) for information on development setup, and user usage
+
+Install node dependencies
+```
+$ yarn && yarn install --production=false
+```
+
+Run tests
+```
+$ yarn test
+```
+
+# Testing Framework and Execution
+
+Install [Mocha](https://semaphoreci.com/community/tutorials/getting-started-with-node-js-and-mocha)
+```
+$ npm install mocha
+$ npm install chai
+
+```
+Execute Test Files
+```
+$ npm run test
+```
+
+# Updating on server
+
+```shell
+ssh <username>@server.redstonelab.net # ssh into the server
+cd /var/www/html # go to the html directory
+sudo ./update.sh # run the update script
+```
+
+# Bug reporting
+To report bugs, go to the "issues" link on this Github page. 

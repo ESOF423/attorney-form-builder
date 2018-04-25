@@ -2,19 +2,18 @@ const path = require('path')
 const express = require('express')
 const router = express.Router()
 
-const dbFunctions = require('../helpers/db-functions.js')
+const formModel = require('../models/form.js')
+
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../views', 'formSearch.html'))
 })
 
-router.get('/getForms', async (req, res) => {
+router.post('/getForms', async (req, res) => {
     try {
-        const name = req.body.name
-        const attorney = req.body.attorney
-        const cost = req.body.cost
+        const {formName, formCost, attorneyName, state} = req.body
 
-        let forms = await dbFunctions.getForms(name, attorney, cost)
+        let forms = await formModel.search(formName, attorneyName, formCost, state)
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({

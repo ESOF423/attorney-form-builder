@@ -1,0 +1,65 @@
+import React, { Component } from 'react';
+
+import AskQuestion from './AskQuestion.jsx'
+
+export default class AskQuestionContainer extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            checked: false
+        }
+    }
+
+    handleCheck = (e) => {
+        this.setState({
+            checked: e.target.checked
+        })
+    }
+
+    render() {
+        let questionsDom = []
+
+        if (this.props.questions){
+            questionsDom = this.props.questions.map((el, i) => {
+                if (el.questions) {
+                    // el is a container question
+                    return <AskQuestionContainer 
+                        key={i} 
+                        label={el.label} 
+                        questions={el.questions} 
+                        onChange={this.props.onChange}/>
+                } else {
+                    // el is a regular question
+                    return <AskQuestion 
+                        key={i} 
+                        label={el.label} 
+                        type={el.type} 
+                        formQuestionId={el.formQuestionId}
+                        containerLabel={this.props.label}
+                        onChange={this.props.onChange}/>
+                }
+            })
+        }
+
+        
+        return (
+            <div>
+                <input type="checkbox"
+                    id={this.props.label}
+                    checked={this.state.checked}
+                    onChange={this.handleCheck}
+                    className="mr1"/>
+
+                <label htmlFor={this.props.label}>{this.props.label}</label>
+
+                {
+                    this.state.checked &&
+                    <div className="question-container">
+                        {questionsDom}
+                    </div>
+                }
+            </div>
+        );
+    }
+}

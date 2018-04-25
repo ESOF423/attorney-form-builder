@@ -8,11 +8,37 @@ const { exec } = require('child_process');
 
 var compile = (form, formAnswers) => {
     return new Promise((resolve, reject) => {
-        var input = form.template
+        let input = ""
+        if (formAnswers){
+            // replaces all the varaibels with their 
+            input = formAnswers.reduce((accumulator, formAnswer) => {
+                return accumulator.replace(new RegExp(`\\{${formAnswer.questionLabel}\\}`, 'gm'), formAnswer.answer)
+            }, form.template)
 
-        formAnswers.forEach(answer => {
-            input = input.replace(new RegExp(`\\{\\{${answer.formQuestionId}\\}\\}`, 'g'), answer.answer)
-        })
+            // get a list of all the used containers (ignoring root container)
+            var containersUsed = formAnswers.filter(el => {
+                return !!el.containerLabel
+            })
+
+            // replace the used containers container text (the [containerlabel ... ] format)
+            containersUsed.forEach(el => {
+                input = input.replace(new RegExp(`(\\[${el.containerLabel})((\\r\\n|\\r|\\n|.)*?)(\\])`, 'gm'), '$2')
+            })
+
+            // remove any un-used containers from input
+            input = input.replace(new RegExp(`\\[((\\r\\n|\\r|\\n|.)*?)\\]`, 'gm'), '')
+        } else {
+            input = form.template
+        }
+        
+
+        // wrap input in the necessary latex
+        input = `
+        \\documentclass[11pt]{article}
+        \\begin{document}
+        ${input}
+        \\end{document}
+        `
 
         var directoryUrl = path.join(__dirname, `../downloads/${uuidv1()}`)
         fs.mkdirSync(directoryUrl)
