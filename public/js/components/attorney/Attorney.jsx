@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import 'css/pure.min.css'
+import 'css/general.css'
 
 export default class Attorney extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ export default class Attorney extends Component {
         })
 
         return (
-            <div>
+            <div className="container">
             <h1>Attorney Page</h1>
 
             <table className="pure-table">

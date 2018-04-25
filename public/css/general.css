@@ -2,3 +2,9 @@
     max-width: 900px;
     margin: 1rem auto;
 }
+
+.question-container {
+    padding: .5rem;
+
+    border-left: solid 5px lightgreen;
+}

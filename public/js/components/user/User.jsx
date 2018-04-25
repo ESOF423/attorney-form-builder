@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 import 'css/pure.min.css'
+import 'css/general.css'
 
 export default class User extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ export default class User extends Component {
             )
         })
         return (
-            <div>
+            <div className="container">
                 <h1>User Page</h1>
                 <table className="pure-table">
                     <thead>

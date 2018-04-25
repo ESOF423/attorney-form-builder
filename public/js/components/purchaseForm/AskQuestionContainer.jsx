@@ -48,13 +48,14 @@ export default class AskQuestionContainer extends Component {
                 <input type="checkbox"
                     id={this.props.label}
                     checked={this.state.checked}
-                    onChange={this.handleCheck}/>
+                    onChange={this.handleCheck}
+                    className="mr1"/>
 
                 <label htmlFor={this.props.label}>{this.props.label}</label>
 
                 {
                     this.state.checked &&
-                    <div>
+                    <div className="question-container">
                         {questionsDom}
                     </div>
                 }

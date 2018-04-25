@@ -89,7 +89,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/c
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".container {\\n    max-width: 900px;\\n    margin: 1rem auto;\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./public/css/general.css?./node_modules/css-loader");
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".container {\\n    max-width: 900px;\\n    margin: 1rem auto;\\n}\\n\\n.question-container {\\n    padding: .5rem;\\n\\n    border-left: solid 5px lightgreen;\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./public/css/general.css?./node_modules/css-loader");
 
 /***/ }),
 

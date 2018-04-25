@@ -6,6 +6,8 @@ import AskQuestionContainer from './AskQuestionContainer.jsx'
 
 import 'js/lib/dentist.min.js'
 import 'css/pure.min.css'
+import 'css/general.css'
+import 'css/gravitons.css'
 
 export default class PurchaseForm extends Component {
     constructor(props) {
@@ -119,7 +121,7 @@ export default class PurchaseForm extends Component {
 
 
         return (
-            <div>
+            <div className="container">
                 <h1>{this.state.formName}</h1>
                 <h2>This form costs: ${this.state.formCost}</h2>
                 <div className="pure-form">

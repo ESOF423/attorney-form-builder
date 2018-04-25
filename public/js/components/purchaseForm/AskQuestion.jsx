@@ -16,7 +16,7 @@ export default class AskQuestion extends Component {
 
     render() {
         return (
-            <div>
+            <div className="my1">
                 <label>{this.props.label}</label><br/>
                 <input type="text" onChange={this.onChange} />
             </div>
